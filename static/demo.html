@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ai-config-gen | Live Demo</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a0f;
+      color: #e2e8f0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 60px 24px; }
+    h1 { font-size: 2.5rem; margin-bottom: 8px; }
+    .subtitle { color: #94a3b8; font-size: 1.1rem; margin-bottom: 40px; }
+    .demo-box {
+      background: #1a1a2e;
+      border: 1px solid #2d2d4a;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    .demo-box h2 { color: #a78bfa; margin-bottom: 16px; font-size: 1.3rem; }
+    textarea {
+      width: 100%; height: 200px; background: #0f0f1a; color: #e2e8f0;
+      border: 1px solid #2d2d4a; border-radius: 8px; padding: 16px;
+      font-family: 'Fira Code', monospace; font-size: 0.9rem;
+      resize: vertical;
+    }
+    textarea:focus { outline: none; border-color: #a78bfa; }
+    button {
+      background: linear-gradient(135deg, #7c3aed, #a78bfa);
+      color: white; border: none; padding: 12px 32px; border-radius: 8px;
+      font-size: 1rem; cursor: pointer; margin-top: 16px; font-weight: 600;
+    }
+    button:hover { opacity: 0.9; }
+    #output {
+      margin-top: 20px; background: #0f0f1a; border: 1px solid #2d2d4a;
+      border-radius: 8px; padding: 16px; font-family: 'Fira Code', monospace;
+      font-size: 0.85rem; white-space: pre-wrap; min-height: 100px;
+    }
+    .examples { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+    .example-btn {
+      background: #2d2d4a; color: #a78bfa; border: 1px solid #3d3d5a;
+      padding: 6px 16px; border-radius: 20px; cursor: pointer; font-size: 0.85rem;
+    }
+    .example-btn:hover { background: #3d3d5a; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; }
+    .stat { background: #1a1a2e; border: 1px solid #2d2d4a; border-radius: 8px; padding: 20px; text-align: center; }
+    .stat-num { font-size: 2rem; color: #a78bfa; font-weight: 700; }
+    .stat-label { color: #94a3b8; font-size: 0.85rem; margin-top: 4px; }
+    .back { display: inline-block; margin-bottom: 24px; color: #a78bfa; text-decoration: none; }
+    .back:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="landing.html" class="back">&larr; Back to landing</a>
+    <h1>ai-config-gen <span style="color:#a78bfa">Demo</span></h1>
+    <p class="subtitle">Paste your package.json, pyproject.toml, Cargo.toml or any config file — get instant AI project documentation.</p>
+
+    <div class="stats">
+      <div class="stat"><div class="stat-num">55+</div><div class="stat-label">Frameworks</div></div>
+      <div class="stat"><div class="stat-num">8</div><div class="stat-label">Languages</div></div>
+      <div class="stat"><div class="stat-num">5</div><div class="stat-label">Output Formats</div></div>
+      <div class="stat"><div class="stat-num">&lt;1s</div><div class="stat-label">Analysis Time</div></div>
+    </div>
+
+    <div class="demo-box">
+      <h2>Paste your config file</h2>
+      <div class="examples">
+        <button class="example-btn" onclick="loadExample('nextjs')">Next.js</button>
+        <button class="example-btn" onclick="loadExample('django')">Django</button>
+        <button class="example-btn" onclick="loadExample('spring')">Spring Boot</button>
+        <button class="example-btn" onclick="loadExample('actix')">Rust Actix</button>
+        <button class="example-btn" onclick="loadExample('laravel')">Laravel</button>
+      </div>
+      <textarea id="input" placeholder="Paste your package.json, pyproject.toml, Cargo.toml, pom.xml..."></textarea>
+      <button onclick="analyze()">Analyze & Generate Docs</button>
+      <div id="output" style="display:none"></div>
+    </div>
+  </div>
+
+<script>
+const examples = {
+  nextjs: `{
+  "name": "my-next-app",
+  "version": "1.0.0",
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@prisma/client": "^5.0.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.3.0",
+    "eslint": "^8.0.0"
+  }
+}`,
+  django: `# setup.cfg or pyproject.toml dependencies
+[project]
+name = "my-django-app"
+version = "1.0.0"
+dependencies = [
+    "Django>=4.2",
+    "djangorestframework",
+    "celery",
+    "redis",
+    "psycopg2-binary",
+    "pytest-django",
+    "gunicorn",
+]
+[project.optional-dependencies]
+dev = ["black", "isort", "flake8"]`,
+  spring: `<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.2.0</version>
+  </parent>
+  <groupId>com.example</groupId>
+  <artifactId>demo</artifactId>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+    </dependency>
+  </dependencies>
+</project>`,
+  actix: `[package]
+name = "my-api"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+actix-web = "4"
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sqlx = { version = "0.7", features = ["postgres", "runtime-tokio"] }`,
+  laravel: `{
+  "name": "laravel/app",
+  "type": "project",
+  "require": {
+    "php": "^8.2",
+    "laravel/framework": "^11.0",
+    "laravel/sanctum": "^4.0",
+    "guzzlehttp/guzzle": "^7.0"
+  },
+  "require-dev": {
+    "laravel/pint": "^1.0",
+    "pestphp/pest": "^2.0",
+    "laravel/sail": "^1.0"
+  }
+}`
+};
+
+function loadExample(type) {
+  document.getElementById('input').value = examples[type];
+}
+
+function analyze() {
+  const input = document.getElementById('input').value.trim();
+  if (!input) { alert('Please paste a config file first.'); return; }
+
+  const out = document.getElementById('output');
+  out.style.display = 'block';
+
+  let detected = [];
+  let lang = 'unknown';
+
+  const lower = input.toLowerCase();
+
+  // Language detection
+  if (lower.includes('package.json')) lang = 'JavaScript/TypeScript';
+  else if (lower.includes('pyproject.toml') || lower.includes('setup.cfg') || lower.includes('requirements')) lang = 'Python';
+  else if (lower.includes('cargo.toml')) lang = 'Rust';
+  else if (lower.includes('pom.xml') || lower.includes('build.gradle')) lang = 'Java/Kotlin';
+  else if (lower.includes('composer.json')) lang = 'PHP';
+  else if (lower.includes('go.mod')) lang = 'Go';
+  else if (lower.includes('gemfile')) lang = 'Ruby';
+  else if (lower.includes('pubspec.yaml')) lang = 'Dart';
+
+  // Framework detection
+  const fws = {
+    'React': ['react', 'react-dom', '.jsx'],
+    'Next.js': ['next', 'next.config'],
+    'Vue.js': ['vue', 'nuxt'],
+    'Angular': ['angular', '@angular'],
+    'Django': ['django'],
+    'FastAPI': ['fastapi', 'uvicorn'],
+    'Flask': ['flask'],
+    'Spring Boot': ['spring-boot', 'springframework.boot'],
+    'Laravel': ['laravel', 'artisan'],
+    'Actix': ['actix'],
+    'Rocket': ['rocket'],
+    'Tokio': ['tokio'],
+    'Tailwind CSS': ['tailwindcss', 'tailwind'],
+    'Prisma': ['prisma', '@prisma'],
+    'Celery': ['celery'],
+    'Redis': ['redis'],
+    'PostgreSQL': ['postgresql', 'psycopg2', 'pg'],
+    'SQLx': ['sqlx'],
+    'Jest': ['jest'],
+    'Pytest': ['pytest'],
+  };
+
+  for (const [name, indicators] of Object.entries(fws)) {
+    if (indicators.some(i => lower.includes(i))) {
+      detected.push(name);
+    }
+  }
+
+  let result = `DETECTED: Language = ${lang}\n`;
+  result += `Frameworks = [${detected.join(', ')}]\n\n`;
+  result += `--- What ai-config-gen generates for this project ---\n\n`;
+  result += `# ${detected[0] || 'Project'} Configuration Summary\n\n`;
+  result += `## Tech Stack\n- **Language**: ${lang}\n- **Frameworks**: ${detected.join(', ') || 'None detected'}\n\n`;
+  result += `## Setup\n\`\`\`bash\n`;
+  if (lang === 'JavaScript/TypeScript') result += `npm install\nnpm run dev\n`;
+  else if (lang === 'Python') result += `pip install -e .\npython manage.py runserver\n`;
+  else if (lang === 'Java/Kotlin') result += `./mvnw spring-boot:run\n`;
+  else if (lang === 'Rust') result += `cargo run\n`;
+  else if (lang === 'PHP') result += `composer install\nphp artisan serve\n`;
+  else result += `# Install dependencies for ${lang}\n`;
+  result += `\`\`\`\n\n`;
+  result += `## Project Structure\n- See full structure in generated .ai_config.md\n\n`;
+  result += `--- This is a simplified preview. Run \`ai-config-gen .\` locally for full output. ---`;
+
+  out.textContent = result;
+}
+</script>
+</body>
+</html>
