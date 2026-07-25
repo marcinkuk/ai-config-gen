@@ -58,9 +58,12 @@
     "Reddit launch post written (marketing/reddit_launch_post.md)",
     "VSCode extension scaffold built (vscode-extension/)"
   ],
+  "actions_completed_phase3": [
+    "npm package scaffold (npm-package/) — Node.js wrapper for pip CLI",
+    "Docker image definition (Dockerfile) — FastAPI + ai-config-gen on port 8011"
+  ],
   "next_actions": [
-    "Build npm package for TypeScript users",
-    "Create Docker image for cloud-hosted API",
-    "Expand framework detection (more frameworks per language)"
+    "Expand framework detection (more frameworks per language)",
+    "Build comprehensive README with examples for GitHub"
   ]
 }
