@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ai-config-gen — Auto-Generate AI Coding Assistant Configs</title>
+<style>
+  :root { --bg:#0a0a0f; --surface:#12121a; --border:#2a2a3a; --accent:#6ee7b7; --text:#e4e4e7; --muted:#71717a; --danger:#ef4444; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--border); }
+  nav .logo { font-weight: 700; font-size: 1.2rem; color: var(--accent); text-decoration: none; }
+  nav .links a { color: var(--muted); text-decoration: none; margin-left: 24px; font-size: 0.9rem; }
+  nav .links a:hover { color: var(--text); }
+  .hero { text-align: center; padding: 80px 0 60px; }
+  .hero h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px; }
+  .hero h1 span { color: var(--accent); }
+  .hero p { color: var(--muted); font-size: 1.15rem; max-width: 640px; margin: 0 auto 32px; }
+  .hero .badge { display: inline-block; background: rgba(110,231,183,0.1); color: var(--accent); padding: 4px 14px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; margin-bottom: 20px; }
+  .cmd { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 24px; display: inline-block; font-family: 'Fira Code', 'Cascadia Mono', monospace; font-size: 0.95rem; color: var(--accent); margin-bottom: 24px; }
+  .btn { display: inline-block; padding: 12px 28px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.95rem; transition: transform 0.15s; }
+  .btn-primary { background: var(--accent); color: #0a0a0f; }
+  .btn-primary:hover { transform: translateY(-2px); }
+  .btn-outline { border: 1px solid var(--border); color: var(--text); margin-left: 12px; }
+  .section { padding: 70px 0; }
+  .section h2 { text-align: center; font-size: 2rem; margin-bottom: 8px; }
+  .section .sub { text-align: center; color: var(--muted); margin-bottom: 48px; }
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .feature { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 32px 28px; }
+  .feature h3 { font-size: 1.1rem; margin-bottom: 8px; }
+  .feature p { color: var(--muted); font-size: 0.9rem; }
+  .feature .icon { font-size: 1.8rem; margin-bottom: 12px; }
+  .pricing { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 900px; margin: 0 auto; }
+  .price-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 36px 28px; text-align: center; position: relative; }
+  .price-card.pro { border-color: var(--accent); }
+  .price-card.pro .tag { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #0a0a0f; padding: 4px 16px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; }
+  .price-card h3 { font-size: 1.3rem; margin-bottom: 4px; }
+  .price-card .price { font-size: 2.2rem; font-weight: 800; color: var(--accent); margin: 12px 0; }
+  .price-card .price small { font-size: 0.9rem; color: var(--muted); font-weight: 400; }
+  .price-card ul { list-style: none; text-align: left; margin: 20px 0; }
+  .price-card li { padding: 6px 0; color: var(--muted); font-size: 0.9rem; }
+  .price-card li::before { content: "✓ "; color: var(--accent); font-weight: 700; }
+  .price-card .cta { margin-top: 20px; }
+  .supported { text-align: center; margin-top: 40px; color: var(--muted); font-size: 0.9rem; }
+  .supported code { background: var(--surface); padding: 3px 10px; border-radius: 6px; font-size: 0.85rem; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: center; padding: 40px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .stats .num { font-size: 2.4rem; font-weight: 800; color: var(--accent); }
+  .stats .label { color: var(--muted); font-size: 0.85rem; }
+  .footer { text-align: center; padding: 40px 0; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); }
+  .footer a { color: var(--accent); text-decoration: none; }
+  @media(max-width:700px){ .hero h1{font-size:2rem} .stats{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<div class="container">
+<nav>
+  <a class="logo" href="#">ai-config-gen</a>
+  <div class="links">
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="https://github.com/marcinkuk/ai-config-gen" target="_blank">GitHub</a>
+    <a href="https://pypi.org/project/ai-config-gen/" target="_blank">PyPI</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="badge">v0.3.0 — Now with sponsorship attribution</div>
+  <h1>Stop wasting time writing<br><span>AI config files</span></h1>
+  <p>Analyze any codebase. Generate optimized config files for Claude Code, Cursor, Windsurf and other AI coding assistants — in one command.</p>
+  <div class="cmd">$ pip install ai-config-gen && ai-config-gen .</div>
+  <br><br>
+  <a class="btn btn-primary" href="https://pypi.org/project/ai-config-gen/">Install Now</a>
+  <a class="btn btn-outline" href="https://github.com/marcinkuk/ai-config-gen">View on GitHub</a>
+</div>
+
+<div class="stats">
+  <div><div class="num">14+</div><div class="label">Languages supported</div></div>
+  <div><div class="num">3</div><div class="label">Config formats generated</div></div>
+  <div><div class="num">0</div><div class="label">External dependencies</div></div>
+</div>
+
+<div class="section" id="features">
+  <h2>How it works</h2>
+  <p class="sub">One command. Full codebase analysis. Three config files.</p>
+  <div class="features">
+    <div class="feature">
+      <div class="icon">🔍</div>
+      <h3>Auto-detect everything</h3>
+      <p>Language, frameworks, package managers, CI/CD, Docker, architecture patterns, coding conventions — all detected automatically.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🧠</div>
+      <h3>Smart pattern recognition</h3>
+      <p>Recognizes MVC, Clean Architecture, Modular, Monorepo structures. Detects type hints, async/await usage, class vs function patterns.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">📝</div>
+      <h3>Generate configs</h3>
+      <p>Outputs <code>.claude.md</code>, <code>.cursorrules</code>, <code>.windsurfrules</code> — tailored to your project's actual architecture.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="pricing">
+  <h2>Pricing</h2>
+  <p class="sub">Free to use. Support the work.</p>
+  <div class="pricing">
+    <div class="price-card">
+      <h3>Free</h3>
+      <div class="price">$0<small>/forever</small></div>
+      <ul>
+        <li>CLI tool (pip install)</li>
+        <li>All 3 config formats</li>
+        <li>14+ language support</li>
+        <li>Full framework detection</li>
+        <li>Open source (MIT)</li>
+      </ul>
+      <div class="cta"><a class="btn btn-primary" href="https://pypi.org/project/ai-config-gen/">Install Free</a></div>
+    </div>
+    <div class="price-card pro">
+      <div class="tag">SUPPORT</div>
+      <h3>Backer</h3>
+      <div class="price">$5<small>/month</small></div>
+      <ul>
+        <li>Everything in Free</li>
+        <li>Support active development</li>
+        <li>Early access to new features</li>
+        <li>Your name in credits</li>
+        <li>Priority issue response</li>
+      </ul>
+      <div class="cta"><a class="btn btn-primary" href="https://github.com/sponsors/marcinkuk">Become a Backer</a></div>
+    </div>
+  </div>
+  <div class="supported">
+    Supports: <code>Python</code> <code>TypeScript</code> <code>Rust</code> <code>Go</code> <code>Java</code> <code>Kotlin</code> <code>Ruby</code> <code>PHP</code> <code>C#</code> <code>C++</code> <code>Swift</code> <code>Vue.js</code> <code>Svelte</code>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Supported Config Formats</h2>
+  <p class="sub">One tool. Three AI assistants.</p>
+  <div class="features">
+    <div class="feature" style="text-align:center">
+      <div class="icon">🐕</div>
+      <h3>.claude.md</h3>
+      <p>For Claude Code / Anthropic Claude</p>
+    </div>
+    <div class="feature" style="text-align:center">
+      <div class="icon">🖥️</div>
+      <h3>.cursorrules</h3>
+      <p>For Cursor IDE</p>
+    </div>
+    <div class="feature" style="text-align:center">
+      <div class="icon">🌊</div>
+      <h3>.windsurfrules</h3>
+      <p>For Windsurf IDE</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>ai-config-gen is MIT licensed. <a href="https://github.com/marcinkuk/ai-config-gen">Source on GitHub</a> · <a href="https://pypi.org/project/ai-config-gen/">PyPI Page</a></p>
+  <p style="margin-top:8px">Built by <a href="https://github.com/sponsors/marcinkuk">@marcinkuk</a></p>
+</div>
+</div>
+</body>
+</html>
