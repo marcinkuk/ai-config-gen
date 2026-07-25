@@ -1,15 +1,29 @@
 # ai-config-gen
 
 [![PyPI](https://img.shields.io/pypi/v/ai-config-gen.svg)](https://pypi.org/project/ai-config-gen/)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/ai-config-gen.svg)](https://pypi.org/project/ai-config-gen/)
 [![Python](https://img.shields.io/pypi/pyversions/ai-config-gen.svg)](https://pypi.org/project/ai-config-gen/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Tests](https://github.com/marcinkuk/ai-config-gen/actions/workflows/ci.yml/badge.svg)](https://github.com/marcinkuk/ai-config-gen/actions)
 
-Analyze any codebase and generate optimized config files for AI coding assistants (.claude.md, .cursorrules, .windsurfrules) — in one command.
+> **Stop writing AI config files by hand.** Analyze any codebase and generate `.claude.md`, `.cursorrules`, `.windsurfrules` in one command. 55+ frameworks auto-detected. Zero dependencies.
 
-## Why
+```bash
+pip install ai-config-gen
+ai-config-gen /path/to/project
+# ✨ Generated .claude.md, .cursorrules, .windsurfrules
+```
 
-Every project needs config files that tell AI coding assistants (Claude Code, Cursor, Windsurf) about its architecture, frameworks, and conventions. Writing these manually is tedious. This tool does it automatically.
+## Why ai-config-gen?
+
+Every project needs config files that tell AI coding assistants (Claude Code, Cursor, Windsurf, GitHub Copilot) about its architecture, frameworks, and conventions. Writing these manually takes **hours per project**. This tool does it in **seconds**.
+
+| Feature | Manual | ai-config-gen |
+|---------|--------|---------------|
+| Time per project | 30-120 min | < 2 sec |
+| Framework coverage | What you remember | 55+ auto-detected |
+| Accuracy | Error-prone | 100% file-based analysis |
+| Consistency | Varies | Identical every run |
 
 ## Installation
 
@@ -104,40 +118,57 @@ $ ai-config-gen ./my-website
 ✨ Generated: .claude.md, .cursorrules, .windsurfrules
 ```
 
-## Web API
+## Distribution
 
-The tool also ships with a FastAPI web server for remote config generation:
+### VSCode Extension
+
+Generate configs with one click from the VSCode command palette:
+
+| Marketplace | Install |
+|-------------|---------|
+| [![VSCode Marketplace](https://img.shields.io/badge/VSCode-Marketplace-blue)](https://marketplace.visualstudio.com/items?itemName=marcinkuk.ai-config-gen-vscode) | Download `.vsix` from [Releases](https://github.com/marcinkuk/ai-config-gen/releases) |
 
 ```bash
-pip install ai-config-gen
-serve-instruct
+# Or build from source
+cd vscode-extension && npm install && npm run compile
 ```
 
-Starts on port 8011 with rate limiting (10 req/min free tier).
+### npm Package
 
-## Docker
+Use the npm wrapper for Node.js projects:
+
+```bash
+npm install -g ai-config-gen
+ai-config-gen /path/to/project
+```
+
+### Docker
 
 ```bash
 docker build -t ai-config-gen .
 docker run -p 8011:8011 ai-config-gen
 ```
 
-## VSCode Extension
+### Web API
 
-One-click config generation from the VSCode command palette:
+Self-hosted FastAPI server with rate limiting:
 
 ```bash
-# Build from source
-cd vscode-extension
-npm install
-npm run compile
-# Package for VSCode
-npx vsce package
+pip install ai-config-gen
+serve-instruct
 ```
 
-## License
+Starts on `http://localhost:8011` with 10 req/min free tier.
 
-MIT — see [LICENSE](LICENSE) for details.
+## Pricing
+
+| Plan | Price | Best For |
+|------|-------|----------|
+| **Free** | $0 | Individual developers |
+| **Pro** | $9/mo | Teams needing API access |
+| **Enterprise** | Custom | Self-hosted + SLA |
+
+[View full pricing →](https://github.com/marcinkuk/ai-config-gen/tree/main/static/pricing.html)
 
 ## Support the Project
 
@@ -154,3 +185,7 @@ python -m pytest -v --ignore=test_projects
 ```
 
 All 25 tests must pass.
+
+## License
+
+MIT — see [LICENSE](LICENSE) for details.

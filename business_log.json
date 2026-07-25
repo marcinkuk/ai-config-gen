@@ -3,7 +3,7 @@
   "weekly_infrastructure_cost": 50.0,
   "human_cost_per_hour": 50.0,
   "current_strategy": "Growth + Monetization phase: Marketing launch, Pro pricing, distribution expansion",
-  "product_status": "v0.3.0 PUBLISHED on PyPI + GitHub. CI/CD pipeline active. Sponsorship banners integrated.",
+  "product_status": "v0.5.0 tag pushed to GitHub. CI/CD pipeline active. VSCode .vsix built. npm package ready.",
   "actions_taken": [
     "Market research: identified gap in AI coding assistant config generation",
     "Built MVP: ai-config-gen CLI with ProjectAnalyzer + ConfigGenerator",
@@ -80,9 +80,12 @@
     "Built comprehensive README.md with usage examples, feature matrix, Docker, VSCode, and sponsorship links"
   ],
   "next_actions": [
-    "v0.5.0 built and ready — waiting for human to publish to PyPI",
-    "Create pypi-publish.sh convenience script for fast deploy",
-    "Research next product: VSCode extension marketplace submission",
-    "Build npm package publish-ready version"
+    "Human: Publish v0.5.0 to PyPI (twine upload dist/ai_config_gen-0.5.0.* )",
+    "Human: Post HN Show HN (marketing/hn_launch_post.md)",
+    "Human: Post Reddit r/sideproject + r/Python",
+    "Build GitHub Release with .vsix attachment",
+    "Publish npm package to npmjs.com",
+    "Set up Stripe payment integration for Pro tier",
+    "Build GitHub copilot-instructions.md output format"
   ]
 }
