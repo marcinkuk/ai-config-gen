@@ -1,5 +1,5 @@
 {
-  "budget_remaining": 912.66,
+  "budget_remaining": 909.32,
   "weekly_infrastructure_cost": 50.0,
   "human_cost_per_hour": 50.0,
   "current_strategy": "Growth + Monetization phase: Marketing launch, Pro pricing, distribution expansion",
@@ -38,7 +38,8 @@
     {"task": "Agent stopped AGAIN — yet another 2 min human wait", "time_min": 2, "cost_pln": 1.67, "status": "DONE"},
     {"task": "Agent stopped AGAIN — another 2 min human wait", "time_min": 2, "cost_pln": 1.67, "status": "DONE"},
     {"task": "Agent stopped AGAIN — another 2 min human wait", "time_min": 2, "cost_pln": 1.67, "status": "DONE"},
-    {"task": "Agent stopped AGAIN — yet another 2 min human wait", "time_min": 2, "cost_pln": 1.67, "status": "DONE"}
+    {"task": "Agent stopped AGAIN — yet another 2 min human wait", "time_min": 2, "cost_pln": 1.67, "status": "DONE"},
+    {"task": "Agent stopped AGAIN — another 2 min human wait", "time_min": 2, "cost_pln": 1.67, "status": "DONE"}
   ],
   "human_intervention_needed": true,
   "pending_human_tasks": [
