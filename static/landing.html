@@ -2,111 +2,107 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ai-config-gen — AI Coding Assistant Config Generator</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ai-config-gen — Auto-Generate AI Coding Assistant Configs</title>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
-  .container{max-width:960px;margin:0 auto;padding:0 24px}
-  header{padding:48px 0 24px;text-align:center;border-bottom:1px solid #21262d}
-  h1{font-size:2.5rem;color:#58a6ff;margin-bottom:8px}
-  .subtitle{font-size:1.1rem;color:#8b949e}
-  .badge{display:inline-block;background:#238636;color:#fff;padding:2px 10px;border-radius:12px;font-size:.8rem;margin-left:8px;vertical-align:middle}
-  .hero{padding:64px 0;text-align:center}
-  .hero h2{font-size:1.8rem;color:#f0f6fc;margin-bottom:16px}
-  .hero p{font-size:1.05rem;color:#8b949e;max-width:600px;margin:0 auto 32px}
-  .cta{display:inline-block;background:#238636;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:1.05rem;font-weight:600;transition:background .2s}
-  .cta:hover{background:#2ea043}
-  .cmd{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px 24px;display:inline-block;font-family:monospace;font-size:1rem;margin-top:16px;color:#79c0ff}
-  section{padding:48px 0}
-  section h2{text-align:center;font-size:1.5rem;color:#f0f6fc;margin-bottom:32px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-  .card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:24px;transition:border-color .2s}
-  .card:hover{border-color:#58a6ff}
-  .card h3{color:#58a6ff;margin-bottom:8px;font-size:1.1rem}
-  .card p{color:#8b949e;font-size:.95rem}
-  .formats{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:24px}
-  .fmt{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:20px 28px;text-align:center;min-width:150px}
-  .fmt code{color:#79c0ff;font-size:1.1rem;display:block;margin-bottom:4px}
-  .fmt span{color:#8b949e;font-size:.85rem}
-  .example{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:24px;margin:24px auto;max-width:640px;font-family:monospace;font-size:.9rem}
-  .example .comment{color:#8b949e}
-  .example .keyword{color:#ff7b72}
-  .example .string{color:#a5d6ff}
-  footer{text-align:center;padding:32px 0;border-top:1px solid #21262d;color:#484f58;font-size:.85rem}
-  footer a{color:#58a6ff}
-  @media(max-width:600px){h1{font-size:1.8rem}.hero h2{font-size:1.3rem}}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0f;--card:#13131a;--border:#252530;--accent:#6c5ce7;--text:#e2e2e8;--muted:#888;--green:#00d68f}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.container{max-width:900px;margin:0 auto;padding:40px 20px}
+.hero{text-align:center;padding:60px 0 40px}
+h1{font-size:2.5rem;background:linear-gradient(135deg,#6c5ce7,#00d68f);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px}
+.hero p{font-size:1.2rem;color:var(--muted);max-width:600px;margin:0 auto 30px}
+.btn{display:inline-block;padding:12px 28px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;transition:.2s}
+.btn:hover{opacity:.85;transform:translateY(-1px)}
+.badges{margin:20px 0}
+.shield{display:inline-block;background:#1a1a2a;color:#ccc;padding:4px 10px;border-radius:4px;font-size:.8rem;text-decoration:none;margin:0 6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin:30px 0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;transition:.2s}
+.card:hover{border-color:var(--accent)}
+.card h3{color:var(--accent);margin-bottom:8px}
+.card p{color:var(--muted);font-size:.95rem}
+code{background:#1a1a2a;padding:2px 6px;border-radius:4px;font-size:.9em}
+pre{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px;overflow-x:auto;font-size:.85rem;line-height:1.5}
+pre .hl{color:var(--green)}
+.section{margin:50px 0}
+.section h2{font-size:1.5rem;margin-bottom:16px}
+.footer{text-align:center;padding:40px 0;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border)}
+.stats{display:flex;justify-content:center;gap:40px;margin:20px 0}
+.stat{text-align:center}
+.stat .num{font-size:2rem;font-weight:700;color:var(--green)}
 </style>
 </head>
 <body>
-<header>
 <div class="container">
-<h1>ai-config-gen <span class="badge">v0.1.0</span></h1>
-<p class="subtitle">Analyze any codebase. Generate optimized AI assistant configs.</p>
-</div>
-</header>
 
-<section class="hero">
-<div class="container">
-<h2>Stop writing <code>.claude.md</code> by hand.</h2>
-<p>Your AI coding assistant needs context. We generate it automatically — from your actual codebase structure, frameworks, conventions, and dependencies.</p>
-<a href="#" class="cta">pip install ai-config-gen</a><br>
-<span class="cmd">ai-config-gen /path/to/project</span>
+<div class="hero">
+<h1>ai-config-gen</h1>
+<p>Auto-generate <code>.claude.md</code>, <code>.cursorrules</code>, <code>.windsurfrules</code> for any codebase — in one command.</p>
+<div class="badges">
+<a href="https://pypi.org/project/ai-config-gen/" class="shield">PyPI v0.5.0</a>
+<a href="https://github.com/marcinkuk/ai-config-gen" class="shield">GitHub</a>
+<a href="https://github.com/sponsors/marcinkuk" class="shield">⭐ Sponsor</a>
 </div>
-</section>
+<div class="stats">
+<div class="stat"><div class="num">55+</div>Frameworks</div>
+<div class="stat"><div class="num">14+</div>Languages</div>
+<div class="stat"><div class="num">0</div>Deps</div>
+</div>
+<div style="margin-top:20px">
+<a href="https://pypi.org/project/ai-config-gen/" class="btn">pip install ai-config-gen</a>
+</div>
+</div>
 
-<section>
-<div class="container">
+<div class="section">
 <h2>How it works</h2>
+<pre><span class="hl">$ pip install ai-config-gen</span>
+$ ai-config-gen ./my-project
+
+🔍 Analyzing ./my-project...
+📊 Detected: Python + FastAPI + pytest + Docker + MIT
+✨ Generated: .claude.md, .cursorrules, .windsurfrules</pre>
+</div>
+
+<div class="section">
+<h2>Features</h2>
 <div class="grid">
-<div class="card"><h3>🔍 Analyze</h3><p>Scans your project: language, frameworks, architecture patterns, package managers, CI/CD, Docker, test frameworks.</p></div>
-<div class="card"><h3>📝 Generate</h3><p>Creates optimized config files for Claude Code, Cursor IDE, and Windsurf — tailored to your codebase.</p></div>
-<div class="card"><h3>🚀 Deploy</h3><p>Drop the configs into your repo. Your AI assistant instantly understands your project.</p></div>
+<div class="card"><h3>🔍 Auto-Detection</h3><p>55+ frameworks: Django, React, Next.js, Laravel, Rails, Spring Boot, and many more.</p></div>
+<div class="card"><h3>📦 Zero Dependencies</h3><p>Pure Python stdlib. No external libraries. Install and run.</p></div>
+<div class="card"><h3>🎨 Multiple Formats</h3><p>Generates configs for Claude Code, Cursor IDE, and Windsurf — in one command.</p></div>
+<div class="card"><h3>🐳 Docker Ready</h3><p>Run as a containerized web API with FastAPI on port 8011.</p></div>
+<div class="card"><h3>📝 Smart Analysis</h3><p>Detects languages, frameworks, CI/CD, Docker, license, and coding conventions.</p></div>
+<div class="card"><h3>⚡ VSCode Extension</h3><p>One-click config generation from the VSCode command palette.</p></div>
 </div>
 </div>
-</section>
 
-<section>
-<div class="container">
-<h2>Output Formats</h2>
-<div class="formats">
-<div class="fmt"><code>.claude.md</code><span>Claude Code</span></div>
-<div class="fmt"><code>.cursorrules</code><span>Cursor IDE</span></div>
-<div class="fmt"><code>.windsurfrules</code><span>Windsurf</span></div>
+<div class="section">
+<h2>Supported Frameworks</h2>
+<div style="columns:2;column-gap:24px;font-size:.9rem">
+<div style="margin-bottom:8px"><code>Django</code> <code>Flask</code> <code>FastAPI</code> <code>Django REST</code></div>
+<div style="margin-bottom:8px"><code>React</code> <code>Next.js</code> <code>Vue.js</code> <code>Angular</code></div>
+<div style="margin-bottom:8px"><code>Svelte</code> <code>Nuxt</code> <code>Remix</code> <code>Astro</code></div>
+<div style="margin-bottom:8px"><code>Spring Boot</code> <code>Laravel</code> <code>Rails</code> <code>Cargo</code></div>
+<div style="margin-bottom:8px"><code>pytest</code> <code>Jest</code> <code>Playwright</code> <code>Cypress</code></div>
+<div style="margin-bottom:8px"><code>Tailwind</code> <code>Sass</code> <code>Styled Components</code></div>
 </div>
 </div>
-</section>
 
-<section>
-<div class="container">
-<h2>Example Output</h2>
-<div class="example">
-<span class="comment"># Project Overview</span><br>
-<span class="keyword">Project:</span> <span class="string">fastapi-service</span><br>
-<span class="keyword">Primary Language:</span> <span class="string">Python</span><br>
-<span class="keyword">Tech Stack:</span> <span class="string">Python, FastAPI, pytest</span><br>
-<span class="keyword">Package Manager:</span> <span class="string">pip/uv/poetry</span><br>
-<span class="comment"># ... frameworks, conventions, Docker, CI/CD, guidelines</span>
-</div>
-</div>
-</section>
-
-<section>
-<div class="container">
-<h2>Supported Languages</h2>
+<div class="section">
+<h2>Distribution</h2>
 <div class="grid">
-<div class="card"><h3>Python</h3><p>Django, FastAPI, Flask, pytest, poetry</p></div>
-<div class="card"><h3>TypeScript/JS</h3><p>React, Next.js, Node.js, Tailwind</p></div>
-<div class="card"><h3>Rust</h3><p>Cargo, serde, tokio, async</p></div>
-<div class="card"><h3>Go, Java, Ruby, PHP...</h3><p>Any language — auto-detected</p></div>
+<div class="card"><h3>🐍 PyPI</h3><p><code>pip install ai-config-gen</code></p></div>
+<div class="card"><h3>📦 npm</h3><p><code>npx ai-config-gen</code> (wrapper around Python CLI)</p></div>
+<div class="card"><h3>🐳 Docker</h3><p><code>docker run -p 8011:8011 ai-config-gen</code></p></div>
+<div class="card"><h3>🧩 VSCode</h3><p>Extension Marketplace (coming soon)</p></div>
 </div>
 </div>
-</section>
 
-<footer>
-<div class="container">
-<p>Open-source under MIT License · <a href="#">GitHub</a> · <a href="#">PyPI</a></p>
+<div class="footer">
+<p>ai-config-gen is free and open-source (MIT license).</p>
+<p>If it saves you time, <a href="https://github.com/sponsors/marcinkuk" style="color:var(--accent);text-decoration:none">consider sponsoring the work</a>.</p>
+<p style="margin-top:12px">Built with ❤️ by <a href="https://github.com/marcinkuk" style="color:var(--accent);text-decoration:none">marcinkuk</a></p>
 </div>
-</footer>
+
+</div>
 </body>
 </html>
