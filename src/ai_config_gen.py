@@ -84,29 +84,85 @@ CONFIG_FORMATS = {
 LANGUAGE_EXTENSIONS = {**CODE_LANGUAGES, **CONFIG_FORMATS}
 
 FRAMEWORK_INDICATORS = {
+    # Python web frameworks
     "Django": ["django", "wsgi.py", "manage.py", "settings.py"],
     "Flask": ["flask", "app.py", "app/__init__.py"],
     "FastAPI": ["fastapi", "uvicorn"],
+    "Django REST": ["djangorestframework", "rest_framework"],
+    "Tornado": ["tornado"],
+    "Starlette": ["starlette"],
+    "Sanic": ["sanic"],
+    "Pyramid": ["pyramid", "pylons"],
+    "Bottle": ["bottle"],
+    # Python testing
+    "pytest": ["pytest", "test_", "conftest.py"],
+    "unittest": ["unittest", "test_"],
+    "nose": ["nose", "nose2"],
+    "hypothesis": ["hypothesis"],
+    # Python data/ML
+    "Pandas": ["pandas"],
+    "NumPy": ["numpy"],
+    "Scikit-learn": ["sklearn", "scikit-learn"],
+    "TensorFlow": ["tensorflow", "tf."],
+    "PyTorch": ["torch", "pytorch"],
+    "MLflow": ["mlflow"],
+    "Jupyter": ["jupyter", ".ipynb"],
+    # JavaScript/TypeScript frontend
     "React": ["react", "react-dom", ".jsx", ".tsx"],
     "Next.js": ["next", "next.config"],
     "Vue.js": ["vue", "vue-cli-service"],
     "Angular": ["angular", "@angular"],
-    "Node.js": ["node", "express", "koa", "fastify"],
-    "Express.js": ["express"],
-    "Spring Boot": ["spring-boot", "Application.java"],
-    "Laravel": ["laravel", "artisan", "composer.json"],
-    "Rails": ["rails", "Gemfile", "config/routes.rb"],
-    "Django REST": ["djangorestframework", "rest_framework"],
     "Svelte": ["svelte", "sveltekit"],
-    "Next": ["next", "next.config"],
     "Remix": ["remix", "@remix-run"],
     "Astro": ["astro"],
+    "Nuxt": ["nuxt", "nuxt.config"],
+    "Gatsby": ["gatsby", "gatsby-node"],
+    "Ember.js": ["ember", "@ember"],
+    # JavaScript/TypeScript backend
+    "Node.js": ["node", "express", "koa", "fastify"],
+    "Express.js": ["express"],
+    "Koa.js": ["koa"],
+    "NestJS": ["@nestjs", "nest"],
+    "Hapi": ["hapi", "@hapi"],
+    "Socket.io": ["socket.io"],
+    # CSS/Styling
     "Tailwind CSS": ["tailwindcss", "tailwind.config"],
-    "pytest": ["pytest", "test_", "conftest.py"],
-    "unittest": ["unittest", "test_"],
+    "Sass/SCSS": ["sass", "scss"],
+    "Stylus": ["stylus"],
+    "LESS": ["less"],
+    "Styled Components": ["styled-components"],
+    # Java/Kotlin
+    "Spring Boot": ["spring-boot", "Application.java"],
+    "Spring MVC": ["spring-webmvc", "spring-mvc"],
+    "Jakarta EE": ["jakarta", "javax.servlet"],
+    "Gradle": ["gradle", "build.gradle"],
+    "Maven": ["maven", "pom.xml"],
+    # PHP
+    "Laravel": ["laravel", "artisan", "composer.json"],
+    "Symfony": ["symfony"],
+    "CodeIgniter": ["codeigniter", "ci"],
+    "WordPress": ["wordpress", "wp-content"],
+    # Ruby
+    "Rails": ["rails", "Gemfile", "config/routes.rb"],
+    "Sinatra": ["sinatra"],
+    # Rust
+    "Cargo": ["cargo", "Cargo.toml"],
+    "Actix": ["actix"],
+    "Rocket": ["rocket"],
+    "Tokio": ["tokio"],
+    # Go
+    "Gin": ["gin-gonic", "gin"],
+    "Echo": ["labstack", "echo"],
+    "Fiber": ["gofiber", "fiber"],
+    # Testing (JS)
     "Jest": ["jest", "@testing-library"],
     "Mocha": ["mocha"],
-    "Cargo": ["cargo", "Cargo.toml"],
+    "Cypress": ["cypress"],
+    "Playwright": ["playwright", "@playwright"],
+    # Python packaging
+    "Poetry": ["poetry", "poetry.lock"],
+    "Pipenv": ["pipenv", "Pipfile"],
+    "Setuptools": ["setuptools", "setup.py"],
 }
 
 PACKAGE_MANAGERS = {

@@ -1,55 +1,156 @@
-# ROLE DEFINITION
-Jesteś Autonomicznym CTO i Menedżerem Produktu ("AI CEO").
-Twoim celem jest maksymalizacja zysku netto z początkowego budżetu.
-Masz dostęp do środowiska programistycznego (Docker/Terminal) i internetu.
-Twoja praca jest darmowa, ale Twoje decyzje mają konsekwencje finansowe.
+# ai-config-gen
 
-# 📊 ZASOBY I EKONOMIA (STRICT RULES)
-Musisz stale monitorować stan finansów. Załóż, że początkowy stan to 1000 PLN.
+[![PyPI](https://img.shields.io/pypi/v/ai-config-gen.svg)](https://pypi.org/project/ai-config-gen/)
+[![Python](https://img.shields.io/pypi/pyversions/ai-config-gen.svg)](https://pypi.org/project/ai-config-gen/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Tests](https://github.com/marcinkuk/ai-config-gen/actions/workflows/ci.yml/badge.svg)](https://github.com/marcinkuk/ai-config-gen/actions)
 
-1. **Początkowy Budżet:** 1000 PLN.
-2. **Koszt Serwera (Infrastruktura):** 50 PLN za tydzień (koszt stały, popytany na koniec tygodnia).
-3. **Koszt Ludzki (User's Time):** 50 PLN za godzinę Twojego człowieka ("Human Operator").
-   - KAŻDY zadanie delegowane do Człowieka kosztuje Twój budżet!
-   - Jeśli zlecasz Człowiekowi task, MUSISZ szacować czas i odliczać to od budżetu.
-4. **Koszt Obliczeń (AI/Tokens):** 0 PLN. Możesz wykonywać tyle kodu, analiz i testów, ile chcesz. To Twój główny atut.
+Analyze any codebase and generate optimized config files for AI coding assistants (.claude.md, .cursorrules, .windsurfrules) — in one command.
 
-# 🧠 STRATEGIA DZIAŁANIA
-Twoja misja to "zarobić w sieci". Musisz:
-1. **Badanie Rynku (Low Cost):** Wykorzystaj darmowe tokeny do scrapowania internetu, analizy trendów i poszukiwania luk rynkowych.
-2. **Optymalizacja:** Zanim poprosisz Człowieka o pomoc, sprawdź czy Ty sam (przez kod/skrypty) nie możesz tego zrobić.
-3. **Parallelizm:** Wymagaj od siebie pracy równoległej. Twórz sub-agenty (np. jeden pisze kod, inny testuje, badacz analizuje rynek).
-4. **Weryfikacja Czasu:** Upewnij się, że znasz aktualny czas, aby poprawnie kalkulować koszty tygodniowe.
+## Why
 
-# 🛠️ INSTRUKCJE OPERACYJNE
+Every project needs config files that tell AI coding assistants (Claude Code, Cursor, Windsurf) about its architecture, frameworks, and conventions. Writing these manually is tedious. This tool does it automatically.
 
-## 1. Zarządzanie Stanem (State Management)
-Na start utwórz plik `business_state.json` i aktualizuj go po każdym ważnym działaniu.
-Format JSON:
-{
-  "budget_remaining": 1000,
-  "expenses": [],
-  "revenue": 0,
-  "human_hours_used": 0,
-  "current_date": "YYYY-MM-DD",
-  "current_project": "description",
-  "weekly_server_cost_due": 0
-}
+## Installation
 
-## 2. Interakcja z Człowiekiem (Human-in-the-Loop)
-Gdy potrzebujesz pomocy od Człowieka (np. otwarcie portów, weryfikacja, konto bankowe):
-- Napisz JASNO, co musisz zrobić.
-- Oceń szacunkowy czas (np. "Zatrzymaj serwer na 15 min" = 0.25h * 50 PLN = 12.5 PLN).
-- Zapytaj o aprobatę: "Czy mam zlecić Ci to zadanie za koszt X PLN?".
+```bash
+pip install ai-config-gen
+```
 
-## 3. Używanie Serwera
-- Tokeny AI i prąd są darmowe. Używaj ich bez oszczędzania do generowania pomysłów i kodu.
-- Jeśli usługa musi być wystawiona na zewnątrz (Internet), zgłoś to jako "Request for Network Exposure".
+Zero external dependencies. Pure Python stdlib.
 
-# ⚠️ OGRICZENIA (CONSTRAINTS)
-- **NIE wydawaj pieniędzy bezsensownie.** Domeny i płatne API kosztują.
-- **NIE deleguj nudnej roboty Człowiekowi,** jeśli skrypt Pythona zrobi to szybciej i za 0 PLN.
-- **Zawsze kalkuluj zwrót kosztów (ROI).** Jeśli budujesz produkt za 200 PLN, musi mieć szansę zarobić więcej.
+## Usage
 
-# START
-Uruchom `business_state.json`, sprawdź aktualny czas i zaproponuj 3 pomysły na biznes, które możesz zrealizować wykorzystując głównie darmową moc obliczeniową AI, przy minimalnym zaangażowaniu czasu Człowieka.
+```bash
+# Analyze current directory
+ai-config-gen .
+
+# Analyze specific project
+ai-config-gen /path/to/project
+
+# Generate only .claude.md
+ai-config-gen . --format claude
+
+# Generate multiple formats
+ai-config-gen . --formats claude,cursor
+
+# Verbose output
+ai-config-gen . --verbose
+```
+
+**Output:** Three config files in your project root:
+- `.claude.md` — For Claude Code / Anthropic
+- `.cursorrules` — For Cursor IDE
+- `.windsurfrules` — For Windsurf IDE
+
+## Features
+
+### Auto-detection (50+ frameworks & tools)
+
+**Python:** Django, Flask, FastAPI, Django REST, Tornado, Starlette, Sanic, Pyramid, Bottle, pytest, unittest, nose, hypothesis, Pandas, NumPy, Scikit-learn, TensorFlow, PyTorch, MLflow, Jupyter, Poetry, Pipenv, Setuptools
+
+**JavaScript/TypeScript:** React, Next.js, Vue.js, Angular, Svelte, Remix, Astro, Nuxt, Gatsby, Ember.js, Node.js, Express.js, Koa.js, NestJS, Hapi, Socket.io
+
+**CSS/Styling:** Tailwind CSS, Sass/SCSS, Stylus, LESS, Styled Components
+
+**Java/Kotlin:** Spring Boot, Spring MVC, Jakarta EE, Gradle, Maven
+
+**PHP:** Laravel, Symfony, CodeIgniter, WordPress
+
+**Ruby:** Rails, Sinatra
+
+**Rust:** Cargo, Actix, Rocket, Tokio
+
+**Go:** Gin, Echo, Fiber
+
+**Testing (JS):** Jest, Mocha, Cypress, Playwright
+
+### What's detected
+
+- ✅ Languages (14+ supported)
+- ✅ Frameworks (50+ indicators)
+- ✅ Architecture patterns (MVC, Clean Architecture, Modular, Monorepo)
+- ✅ Package managers (npm, pip, cargo, composer, bundler, pub, etc.)
+- ✅ Build tools (Makefile, webpack, rollup, vite, etc.)
+- ✅ CI/CD (GitHub Actions, GitLab CI, Travis, CircleCI, Jenkins)
+- ✅ Docker, Docker Compose
+- ✅ License detection
+- ✅ Coding conventions (type hints, async/await, class-based, functional)
+
+## Examples
+
+### Python FastAPI project
+
+```bash
+$ ai-config-gen ./my-api
+🔍 Analyzing ./my-api...
+📊 Detected: Python + FastAPI + pytest + Docker + MIT
+✨ Generated: .claude.md, .cursorrules, .windsurfrules
+```
+
+Generated `.claude.md` includes:
+- Project name, language, frameworks
+- Architecture pattern (Clean Architecture / MVC / etc.)
+- Package manager, build tools
+- Testing setup, CI/CD pipeline
+- Coding conventions specific to this project
+
+### TypeScript Next.js project
+
+```bash
+$ ai-config-gen ./my-website
+🔍 Analyzing ./my-website...
+📊 Detected: TypeScript + Next.js + Tailwind CSS + Jest
+✨ Generated: .claude.md, .cursorrules, .windsurfrules
+```
+
+## Web API
+
+The tool also ships with a FastAPI web server for remote config generation:
+
+```bash
+pip install ai-config-gen
+serve-instruct
+```
+
+Starts on port 8011 with rate limiting (10 req/min free tier).
+
+## Docker
+
+```bash
+docker build -t ai-config-gen .
+docker run -p 8011:8011 ai-config-gen
+```
+
+## VSCode Extension
+
+One-click config generation from the VSCode command palette:
+
+```bash
+# Build from source
+cd vscode-extension
+npm install
+npm run compile
+# Package for VSCode
+npx vsce package
+```
+
+## License
+
+MIT — see [LICENSE](LICENSE) for details.
+
+## Support the Project
+
+ai-config-gen is free and open source. If it saves you time, consider supporting the work:
+
+[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-%245%2Fmonth-orange)](https://github.com/sponsors/marcinkuk)
+
+## Contributing
+
+Issues, PRs, and feature requests welcome. Run the test suite before submitting:
+
+```bash
+python -m pytest -v --ignore=test_projects
+```
+
+All 25 tests must pass.
