@@ -1,0 +1,222 @@
+{
+  "timestamp": "2026-07-25T07:10:17.538660+00:00",
+  "total_repos_analyzed": 30,
+  "top_languages": {
+    "TypeScript": 6,
+    "Shell": 3,
+    "JavaScript": 5,
+    "Python": 8,
+    "null": 4,
+    "Rust": 4
+  },
+  "top_opportunities": [
+    {
+      "repo": "openclaw/openclaw",
+      "stars": 384070,
+      "fork_ratio": 0.21,
+      "description": "Your own personal AI assistant. Any OS. Any Platform. The lobster way. \ud83e\udd9e ",
+      "topics": [
+        "ai",
+        "assistant",
+        "crustacean",
+        "molty",
+        "openclaw"
+      ]
+    },
+    {
+      "repo": "obra/superpowers",
+      "stars": 260691,
+      "fork_ratio": 0.089,
+      "description": "An agentic skills framework & software development methodology that works.",
+      "topics": [
+        "ai",
+        "brainstorming",
+        "coding",
+        "obra",
+        "sdlc"
+      ]
+    },
+    {
+      "repo": "affaan-m/ECC",
+      "stars": 232991,
+      "fork_ratio": 0.152,
+      "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
+      "topics": [
+        "ai-agents",
+        "anthropic",
+        "claude",
+        "claude-code",
+        "developer-tools"
+      ]
+    },
+    {
+      "repo": "NousResearch/hermes-agent",
+      "stars": 220134,
+      "fork_ratio": 0.19,
+      "description": "The agent that grows with you",
+      "topics": [
+        "ai",
+        "ai-agent",
+        "ai-agents",
+        "anthropic",
+        "chatgpt"
+      ]
+    },
+    {
+      "repo": "multica-ai/andrej-karpathy-skills",
+      "stars": 196119,
+      "fork_ratio": 0.103,
+      "description": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.",
+      "topics": []
+    },
+    {
+      "repo": "ultraworkers/claw-code",
+      "stars": 194889,
+      "fork_ratio": 0.562,
+      "description": "An agent-managed museum exhibit, built in Rust with Gajae-Code / LazyCodex \u2014 developed and maintained with no human intervention.",
+      "topics": []
+    },
+    {
+      "repo": "anomalyco/opencode",
+      "stars": 189477,
+      "fork_ratio": 0.127,
+      "description": "The open source coding agent.",
+      "topics": []
+    },
+    {
+      "repo": "mattpocock/skills",
+      "stars": 187207,
+      "fork_ratio": 0.086,
+      "description": "Skills for Real Engineers. Straight from my .agents directory.",
+      "topics": []
+    },
+    {
+      "repo": "anthropics/skills",
+      "stars": 164016,
+      "fork_ratio": 0.119,
+      "description": "Public repository for Agent Skills",
+      "topics": [
+        "agent-skills"
+      ]
+    },
+    {
+      "repo": "x1xhlol/system-prompts-and-models-of-ai-tools",
+      "stars": 142262,
+      "fork_ratio": 0.245,
+      "description": "FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, VSCode Agent, Warp.dev, Windsurf, Xcode, Z.ai Code, Dia & v0. (And other Open Sourced) System Prompts, Internal Tools & AI Models",
+      "topics": [
+        "ai",
+        "bolt",
+        "cluely",
+        "copilot",
+        "cursor"
+      ]
+    },
+    {
+      "repo": "anthropics/claude-code",
+      "stars": 138998,
+      "fork_ratio": 0.16,
+      "description": "Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands.",
+      "topics": []
+    },
+    {
+      "repo": "msitarzewski/agency-agents",
+      "stars": 136504,
+      "fork_ratio": 0.163,
+      "description": "A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.",
+      "topics": []
+    },
+    {
+      "repo": "garrytan/gstack",
+      "stars": 124191,
+      "fork_ratio": 0.15,
+      "description": "Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager, Doc Engineer, and QA",
+      "topics": []
+    },
+    {
+      "repo": "github/spec-kit",
+      "stars": 123696,
+      "fork_ratio": 0.089,
+      "description": "\ud83d\udcab Toolkit to help you get started with Spec-Driven Development",
+      "topics": [
+        "ai",
+        "copilot",
+        "development",
+        "engineering",
+        "prd"
+      ]
+    },
+    {
+      "repo": "farion1231/cc-switch",
+      "stars": 121006,
+      "fork_ratio": 0.067,
+      "description": "A cross-platform desktop All-in-One assistant for Claude Code, Codex, OpenCode, OpenClaw, Grok Build & Hermes Agent. Only official website: ccswitch.io",
+      "topics": [
+        "ai-tools",
+        "claude-code",
+        "codex",
+        "desktop-app",
+        "grok"
+      ]
+    },
+    {
+      "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "stars": 109872,
+      "fork_ratio": 0.107,
+      "description": "An AI SKILL that provide design intelligence for building professional UI/UX multiple platforms",
+      "topics": [
+        "ai-skills",
+        "antigravity",
+        "claude",
+        "claude-code",
+        "codex"
+      ]
+    },
+    {
+      "repo": "google-gemini/gemini-cli",
+      "stars": 106163,
+      "fork_ratio": 0.135,
+      "description": "An open-source AI agent that brings the power of Gemini directly into your terminal.",
+      "topics": [
+        "ai",
+        "ai-agents",
+        "cli",
+        "gemini",
+        "gemini-api"
+      ]
+    },
+    {
+      "repo": "VoltAgent/awesome-design-md",
+      "stars": 104364,
+      "fork_ratio": 0.115,
+      "description": "A collection of DESIGN.md files analysis by popular brand design systems. Drop one into your project and let coding agents generate a matching UI.",
+      "topics": [
+        "awesome-list",
+        "design-md",
+        "design-system",
+        "design-tokens",
+        "figma"
+      ]
+    },
+    {
+      "repo": "openai/codex",
+      "stars": 101286,
+      "fork_ratio": 0.15,
+      "description": "Lightweight coding agent that runs in your terminal",
+      "topics": []
+    },
+    {
+      "repo": "Graphify-Labs/graphify",
+      "stars": 95424,
+      "fork_ratio": 0.097,
+      "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
+      "topics": [
+        "ai-agents",
+        "antigravity",
+        "ast",
+        "claude-code",
+        "code-analysis"
+      ]
+    }
+  ]
+}

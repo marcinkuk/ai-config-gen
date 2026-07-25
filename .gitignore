@@ -1,0 +1,25 @@
+# Build artifacts
+dist/
+build/
+*.egg-info/
+*.egg
+__pycache__/
+.pytest_cache/
+
+# Virtual env
+.venv/
+
+# Tokens (NEVER commit)
+pypi_token.txt
+.env
+
+# Test projects (not needed in public repo)
+test_projects/
+output/
+
+# IDE
+.vscode/
+.idea/
+
+# Temp
+*.pyc

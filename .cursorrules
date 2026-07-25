@@ -1,0 +1,29 @@
+# AI Coding Assistant Rules for ai-config-gen
+
+language: Python
+package_manager: pip/uv/poetry
+
+## Code Style
+- Python with type hints
+- Function-oriented / procedural codebase
+- Use descriptive variable and function names
+- Keep functions focused and under 50 lines
+- Add comments only for non-obvious logic
+
+## Architecture
+- Modular structure (src)
+
+## Testing
+- Write tests for all new features
+- Ensure existing tests pass before submitting changes
+
+## Safety Rules
+- Never expose secrets or API keys in code
+- Validate all user inputs
+- Use parameterized queries for database operations
+- Handle errors gracefully with proper logging
+
+## Git Workflow
+- Write clear, descriptive commit messages
+- One logical change per commit
+- Use conventional commit format when applicable

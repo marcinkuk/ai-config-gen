@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>📋 Instrukcje - Setup konta (3 zadania)</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f6f8fa;color:#1f2328;line-height:1.7;padding:0}
+.container{max-width:760px;margin:0 auto;padding:32px 24px}
+h1{font-size:1.8rem;margin-bottom:8px;color:#0969da}
+.subtitle{color:#656d76;margin-bottom:32px;font-size:1.05rem}
+.task{background:#fff;border:1px solid #d0d7de;border-radius:8px;padding:28px;margin-bottom:24px}
+.task h2{font-size:1.3rem;color:#1f2328;margin-bottom:4px}
+.task .meta{color:#656d76;font-size:.9rem;margin-bottom:16px}
+ol{margin:0 0 0 20px}
+li{margin-bottom:10px}
+li code{background:#f6f8fa;padding:2px 8px;border-radius:4px;font-size:.95rem;border:1px solid #d0d7de}
+.highlight{background:#fff7c3;padding:12px 16px;border-radius:6px;border-left:4px solid #9a6700;margin:12px 0;font-weight:600}
+.note{background:#ddf4ff;padding:12px 16px;border-radius:6px;border-left:4px solid #0969da;margin:12px 0;color:#0550ae}
+.done-check{color:#1a7f37;font-weight:700;font-size:1.2rem}
+a{color:#0969da}
+hr{border:none;border-top:1px solid #d0d7de;margin:8px 0}
+.final-step{background:#dafbe1;border:2px solid #1a7f37;padding:20px;border-radius:8px;text-align:center;margin-top:20px}
+.final-step h3{color:#1a7f37;margin-bottom:8px;font-size:1.2rem}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>📋 Instrukcje Setup — 3 zadania do wykonania</h1>
+<p class="subtitle">Postępuj po kolei: Zadanie 1 → Zadanie 2 → Zadanie 3. Potem kliknij <strong>ZADANIAukończone</strong> na dole strony.</p>
+
+<!-- ===================== ZADANIE 1 ===================== -->
+<div class="task">
+<h2>🔑 Zadanie 1: Załóż konto na PyPI</h2>
+<p class="meta">Czas: ~10 min | Po co: żeby opublikować toola do Pythona</p>
+<ol>
+<li>Otwórz przeglądarkę i wejdź na: <code>https://pypi.org/account/register/</code></li>
+<li>Wypełnij formularz:
+  <ul>
+    <li><strong>Username (Login):</strong> wpisz <code>aiconfiggen</code> (jeśli zajety, dodaj myślnik: <code>ai-config-gen</code>)</li>
+    <li><strong>Email:</strong> wpisz swój email (np. twój@email.com)</li>
+    <li><strong>Password:</strong> wymyśl hasło i zapamiętaj je — <span style="color:#cf222e">potrzebne będzie w Zadaniu 2!</span></li>
+    <li><strong>Confirm Password:</strong> wpisz to samo hasło</li>
+  </ul>
+</li>
+<li>Zamień CAPTCHA (zazwyczaj obrazki z kotami/lampami)</li>
+<li>Kliknij przycisk <strong>Register</strong></li>
+<li>Otwórz skrzynkę email — przyjdzie wiadomość z PyPI z linkiem potwierdzającym</li>
+<li>Kliknij link w emailu, żeby potwierdzić konto</li>
+</ol>
+<div class="note">
+✅ <strong>Gotowe?</strong> Wróć tutaj i odznacz Zadanie 1 na dole strony.
+</div>
+</div>
+
+<!-- ===================== ZADANIE 2 ===================== -->
+<div class="task">
+<h2>🔐 Zadanie 2: Wygeneruj token API dla PyPI</h2>
+<p class="meta">Czas: ~5 min | Po co: żeby tool automatycznie publikował paczkę bez hasła</p>
+<ol>
+<li>Wejdź na: <code>https://pypi.org/manage/account/token/</code></li>
+<li>Jeśli Cię zloguje — świetnie. Jeśli nie — kliknij <strong>Log in</strong> i zaloguj się.</li>
+<li>Wypełnij formularz:
+  <ul>
+    <li><strong>Name:</strong> wpisz <code>ai-config-gen</code></li>
+    <li><strong>Scope:</strong> zaznacz <code>Entire account</code> <em>(to daje dostęp tylko do tego konta PyPI)</em></li>
+  </ul>
+</li>
+<li>Kliknij <strong>Add</strong></li>
+<li>🔴 <strong>WAŻNE:</strong> Wyświetli się token, który wygląda mniej więcej tak: <code>pypi-AgEIc3...dlugaCzcionka...</code></li>
+<li><strong>SKOPIUJ CAŁY TOKEN</strong> — wklej go do notatnika (np. Notatnik / Notion / WhatsApp do siebie)</li>
+<div class="highlight">
+⚠️ TEN TOKEN WYŚWIETLI SIĘ TYLKO JEDEN RAZ. Jeśli go nie skopiujesz teraz, nie będzie można go odzyskać!
+</div>
+<li>Potem kliknij „ZADANIA ukończone" na dole tej strony i wklej token tam gdzie poproszę</li>
+</ol>
+<div class="note">
+✅ <strong>Gotowe?</strong> Odznacz Zadanie 2 i wróć.
+</div>
+</div>
+
+<!-- ===================== ZADANIE 3 ===================== -->
+<div class="task">
+<h2>💰 Zadanie 3: Załóż GitHub Sponsors (opcjonalne)</h2>
+<p class="meta">Czas: ~15 min | Po co: żeby ludzie mogli sponsorować development</p>
+<p><em>To zadanie jest opcjonalne — możesz pominąć, jeśli nie chcesz. Tool i tak będzie działał.</em></p>
+<ol>
+<li>Zaloguj się na: <code>https://github.com</code></li>
+<li>Wejdź na: <code>https://github.com/sponsors/</code></li>
+<li>Kliknij <strong>Get started</strong> (lub <strong>Sign up as a sponsor recipient</strong>)</li>
+<li>Postępuj zgodnie z instrukcjami na ekranie (GitHub poprosi Cię o dane: kraj, konto bankowe / PayPal)</li>
+<li>Gdy skończysz — GitHub wyświetli Ci link typu: <code>https://github.com/sponsors/TWOJ_LOGIN</code></li>
+</ol>
+<div class="note">
+✅ <strong>Gotowe?</strong> Odznacz Zadanie 3 i wróć.
+</div>
+</div>
+
+<!-- ===================== KOŃCZĄCE ===================== -->
+<div class="final-step" id="done-section">
+<h3>✅ ZADANIA UKOŃCZONE</h3>
+<p>Gdy wypełniłeś wszystkie zadania powyżej:</p>
+<p style="margin:16px 0">Wklej tutaj token PyPI z Zadania 2:</p>
+<input type="text" id="pypiToken" placeholder="pypi-AgEI..." style="width:100%;padding:12px;font-size:1rem;border:2px solid #d0d7de;border-radius:6px;max-width:500px">
+<br><br>
+<button onclick="saveToken()" style="background:#1a7f37;color:#fff;border:none;padding:14px 32px;border-radius:8px;font-size:1.1rem;cursor:pointer;font-weight:600">
+  💾 Zapisz token i kontynuuj
+</button>
+<p id="status" style="margin-top:12px;color:#656d76"></p>
+</div>
+
+</div>
+
+<script>
+function saveToken(){
+  var token = document.getElementById('pypiToken').value.trim();
+  if(!token || token.length < 20){
+    document.getElementById('status').innerHTML = '<span style="color:#cf222e">❌ Token jest za krótki. Skopiuj go z PyPI.</span>';
+    return;
+  }
+  // Save to a file the agent can read
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST','http://localhost:55773/api/save-token',true);
+  xhr.setRequestHeader('Content-Type','application/json');
+  xhr.onload = function(){
+    if(xhr.status===200){
+      document.getElementById('status').innerHTML = '<span style="color:#1a7f37">✅ Token zapisany! Agent może kontynuować.</span>';
+    } else {
+      // Fallback: save to local file
+      var blob = new Blob([token],{type:'text/plain'});
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'pypi_token.txt';
+      a.click();
+      document.getElementById('status').innerHTML = '<span style="color:#1a7f37">✅ Token zapisany jako plik pypi_token.txt (sprawdź pobrane pliki)</span>';
+    }
+  };
+  xhr.onerror = function(){
+    // Server not running — save as downloadable file
+    var blob = new Blob([token],{type:'text/plain'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'pypi_token.txt';
+    a.click();
+    document.getElementById('status').innerHTML = '<span style="color:#1a7f37">✅ Token zapisany jako plik pypi_token.txt</span>';
+  };
+  xhr.send(JSON.stringify({token: token}));
+}
+</script>
+</body>
+</html>

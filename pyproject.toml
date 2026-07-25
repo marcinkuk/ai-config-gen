@@ -1,0 +1,10 @@
+[project]
+name = "ai-config-gen"
+version = "0.1.0"
+description = "Analyze any codebase and generate optimized config files for AI coding assistants (.claude.md, .cursorrules, .windsurfrules)"
+readme = "PRODUCT_README.md"
+requires-python = ">=3.13"
+dependencies = []
+
+[project.scripts]
+ai-config-gen = "src.ai_config_gen:main"
