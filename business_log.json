@@ -2,8 +2,8 @@
   "budget_remaining": 948.33,
   "weekly_infrastructure_cost": 50.0,
   "human_cost_per_hour": 50.0,
-  "current_strategy": "AI Coding Config Generator - Published to PyPI. Building GitHub repo + marketing.",
-  "product_status": "v0.1.0 PUBLISHED on PyPI + GitHub. CLI, web API, landing page all working.",
+  "current_strategy": "Growth + Monetization phase: Marketing launch, Pro pricing, distribution expansion",
+  "product_status": "v0.2.0 PUBLISHED on PyPI + GitHub. CLI, web API, landing page all working. CI/CD pipeline active.",
   "actions_taken": [
     "Market research: identified gap in AI coding assistant config generation",
     "Built MVP: ai-config-gen CLI with ProjectAnalyzer + ConfigGenerator",
@@ -12,25 +12,35 @@
     "Created 4 realistic test projects (FastAPI, React/TS, Rust, Django) for validation",
     "Verified tool on all 4 projects — correct detection of languages, frameworks, package managers",
     "Built distribution package (sdist + wheel) — zero external dependencies",
-    "PUBLISHED to PyPI: https://pypi.org/project/ai-config-gen/0.1.0/",
+    "PUBLISHED v0.1.0 to PyPI: https://pypi.org/project/ai-config-gen/0.1.0/",
+    "PUBLISHED v0.2.0 with full metadata, GitHub links, MIT license, keywords",
+    "Created GitHub repo: https://github.com/marcinkuk/ai-config-gen",
+    "Built CI/CD pipeline with GitHub Actions (auto-test, auto-publish)",
+    "Added sponsorship banners to CLI output (passive marketing)",
+    "Added attribution headers to every generated config file",
     "Built web_server.py: FastAPI endpoints with rate limiting",
-    "Created landing page + Polish-language setup instructions",
-    "Created GitHub repo: https://github.com/marcinkuk/ai-config-gen"
+    "Created landing page + Polish-language setup instructions"
   ],
   "human_intervention_needed": false,
   "pending_human_tasks": [],
   "revenue_streams": [
-    {"name": "PyPI package (ai-config-gen)", "status": "PUBLISHED - live", "model": "freemium"},
-    {"name": "GitHub Sponsors (marcinkuk)", "status": "active", "model": "donations"},
-    {"name": "Web API service", "status": "prototype built", "model": "10 req/min free, paid for more"}
+    {"name": "PyPI package (ai-config-gen)", "status": "PUBLISHED - live", "model": "open source + passive attribution"},
+    {"name": "GitHub Sponsors (marcinkuk)", "status": "active", "model": "voluntary donations"},
+    {"name": "Web API service", "status": "prototype built", "model": "freemium: 10 req/min free, Pro tier at $9/mo"},
+    {"name": "Sponsorship banners", "status": "integrated in CLI", "model": "passive conversion from every user"}
   ],
+  "revenue_projections": {
+    "conservative_monthly": {"downloads": 500, "sponsor_conversion_pct": 0.1, "avg_sponsor_pln": 20, "estimated_revenue_pln": 10},
+    "optimistic_monthly": {"downloads": 5000, "sponsor_conversion_pct": 0.05, "avg_sponsor_pln": 20, "estimated_revenue_pln": 50}
+  },
   "expenses": [
     {"description": "Human restart (2 min interruption)", "cost_pln": 1.67}
   ],
   "next_actions": [
-    "Build CI/CD pipeline (GitHub Actions)",
-    "Add Pro features (batch analysis, team configs, custom rulesets)",
-    "Create VSCode extension for one-click config generation",
-    "Research additional revenue streams (JetBrains plugin, API-as-a-service)"
+    "Publish v0.3.0 with sponsorship links + attribution headers",
+    "Build professional landing page with pricing tiers",
+    "Submit to Hacker News 'Show HN' + Reddit r/programming",
+    "Create VSCode extension for 1-click config generation",
+    "Monitor PyPI download stats weekly"
   ]
 }
