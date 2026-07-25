@@ -4,6 +4,7 @@
   "description": "One-click generate .claude.md, .cursorrules, .windsurfrules for your workspace",
   "version": "0.1.0",
   "publisher": "marcinkuk",
+  "repository": "https://github.com/marcinkuk/ai-config-gen",
   "engines": { "vscode": "^1.90.0" },
   "categories": ["Other"],
   "activation": ["onCommand:aiConfigGen.generate"],
