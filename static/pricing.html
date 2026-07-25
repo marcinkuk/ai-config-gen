@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ai-config-gen — Pricing</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0d1117;color:#c9d1d9;line-height:1.6}
+.container{max-width:960px;margin:0 auto;padding:40px 20px}
+h1{text-align:center;font-size:2.2rem;color:#f0f6fc;margin-bottom:8px}
+.subtitle{text-align:center;color:#8b949e;font-size:1.1rem;margin-bottom:48px}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:64px}
+@media(max-width:700px){.plans{grid-template-columns:1fr}}
+.plan{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:32px 24px;position:relative;transition:transform .2s,border-color .2s}
+.plan:hover{transform:translateY(-4px);border-color:#58a6ff}
+.plan.popular{border-color:#f78166;box-shadow:0 0 24px rgba(247,129,102,.25)}
+.plan.popular::before{content:'MOST POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#f78166;color:#fff;font-size:.7rem;font-weight:700;padding:4px 16px;border-radius:20px;letter-spacing:.5px}
+.plan h2{font-size:1.4rem;color:#f0f6fc;margin-bottom:4px}
+.plan .price{font-size:2.4rem;font-weight:700;color:#f0f6fc;margin:12px 0 4px}
+.plan .price span{font-size:1rem;color:#8b949e;font-weight:400}
+.plan .desc{color:#8b949e;font-size:.9rem;margin-bottom:20px;min-height:40px}
+.plan ul{list-style:none;margin-bottom:24px}
+.plan ul li{padding:6px 0;color:#c9d1d9;font-size:.9rem;border-bottom:1px solid #21262d}
+.plan ul li:last-child{border:none}
+.plan ul li::before{content:'✓ ';color:#3fb950;font-weight:700}
+.plan .btn{display:block;width:100%;padding:12px;border-radius:8px;font-size:1rem;font-weight:600;text-align:center;cursor:pointer;text-decoration:none;transition:background .2s}
+.plan .btn-primary{background:#f78166;color:#fff;border:none}
+.plan .btn-primary:hover{background:#e06c54}
+.plan .btn-outline{background:transparent;color:#c9d1d9;border:1px solid #30363d}
+.plan .btn-outline:hover{border-color:#8b949e}
+.faq{margin-top:64px}
+.faq h2{text-align:center;color:#f0f6fc;margin-bottom:24px;font-size:1.5rem}
+.faq-item{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:20px;margin-bottom:12px}
+.faq-item h3{color:#f0f6fc;font-size:1rem;margin-bottom:8px}
+.faq-item p{color:#8b949e;font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>ai-config-gen</h1>
+<p class="subtitle">Auto-generate AI coding assistant configs for any project. Choose your plan.</p>
+
+<div class="plans">
+  <!-- FREE -->
+  <div class="plan">
+    <h2>Free</h2>
+    <div class="price">$0<span>/month</span></div>
+    <p class="desc">Perfect for individual developers getting started.</p>
+    <ul>
+      <li>CLI tool — unlimited runs</li>
+      <li>55+ framework detection</li>
+      <li>3 output formats (.claude.md, .cursorrules, .windsurfrules)</li>
+      <li>VSCode extension</li>
+      <li>npm wrapper</li>
+      <li>Open source (MIT)</li>
+    </ul>
+    <a href="https://pypi.org/project/ai-config-gen/" class="btn btn-outline">pip install</a>
+  </div>
+
+  <!-- PRO -->
+  <div class="plan popular">
+    <h2>Pro</h2>
+    <div class="price">$9<span>/month</span></div>
+    <p class="desc">For teams who need API access and priority features.</p>
+    <ul>
+      <li>Everything in Free</li>
+      <li>REST API — 1,000 requests/mo</li>
+      <li>Custom output formats (YAML, JSON)</li>
+      <li>Batch mode — analyze 10+ projects at once</li>
+      <li>CI/CD webhook integration</li>
+      <li>Priority email support</li>
+    </ul>
+    <a href="#" class="btn btn-primary">Get Started</a>
+  </div>
+
+  <!-- ENTERPRISE -->
+  <div class="plan">
+    <h2>Enterprise</h2>
+    <div class="price">Custom</div>
+    <p class="desc">For large teams requiring SLA and self-hosted deployment.</p>
+    <ul>
+      <li>Everything in Pro</li>
+      <li>Unlimited API requests</li>
+      <li>Self-hosted Docker deployment</li>
+      <li>SSO / SAML integration</li>
+      <li>99.9% uptime SLA</li>
+      <li>Dedicated account manager</li>
+    </ul>
+    <a href="mailto:hello@ai-config-gen.com" class="btn btn-outline">Contact Sales</a>
+  </div>
+</div>
+
+<div class="faq">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item">
+    <h3>Can I cancel my Pro subscription anytime?</h3>
+    <p>Yes. No contracts, no cancellation fees. Your access continues until the end of your billing period.</p>
+  </div>
+  <div class="faq-item">
+    <h3>What happens if I exceed my API quota?</h3>
+    <p>You'll receive a notification at 80% and 100% usage. API calls are queued, not rejected. Upgrade anytime for more quota.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Is the free tier really unlimited?</h3>
+    <p>Yes. The CLI tool and VSCode extension are completely free with unlimited usage. The API is the only gated feature.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Do you offer team discounts?</h3>
+    <p>Yes. 20% off for 5+ seats. 40% off for 20+ seats. Contact us for a custom quote.</p>
+  </div>
+</div>
+</div>
+</body>
+</html>
