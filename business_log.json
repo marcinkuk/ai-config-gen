@@ -64,8 +64,12 @@
     "npm package scaffold (npm-package/) — Node.js wrapper for pip CLI",
     "Docker image definition (Dockerfile) — FastAPI + ai-config-gen on port 8011"
   ],
+  "actions_completed_phase4": [
+    "Expanded framework detection from 23 to 55+ frameworks (Python data/ML, JS backend, PHP, Ruby, Rust, Go, CSS, Java)",
+    "Built comprehensive README.md with usage examples, feature matrix, Docker, VSCode, and sponsorship links"
+  ],
   "next_actions": [
-    "Expand framework detection (more frameworks per language)",
-    "Build comprehensive README with examples for GitHub"
+    "Bump version to v0.5.0 and publish to PyPI (blocked: need PyPI token from human)",
+    "Post HN launch + Reddit launch (blocked: need human to post)"
   ]
 }
