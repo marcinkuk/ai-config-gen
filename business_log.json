@@ -31,8 +31,10 @@
     {"task": "Re-asked question after being corrected (another 1 min wasted)", "time_min": 1, "cost_pln": 0.83, "status": "DONE"},
     {"task": "Yet another unnecessary question despite repeated corrections", "time_min": 1, "cost_pln": 0.83, "status": "DONE"}
   ],
-  "human_intervention_needed": false,
-  "pending_human_tasks": [],
+  "human_intervention_needed": true,
+  "pending_human_tasks": [
+    {"task": "Provide PyPI token for v0.4.0 publication", "estimated_time_hrs": 0.05, "cost_pln": 2.5, "reason": "Cannot publish to PyPI without authentication token. Previous token was not stored in environment."}
+  ],
   "revenue_streams": [
     {"name": "PyPI package (ai-config-gen)", "status": "PUBLISHED - live", "model": "open source + passive attribution"},
     {"name": "GitHub Sponsors (marcinkuk)", "status": "active", "model": "voluntary donations"},
@@ -50,10 +52,15 @@
     {"description": "Human: Budget correction feedback (2 min)", "cost_pln": 1.67},
     {"description": "Total human cost", "cost_pln": 22.51}
   ],
+  "actions_completed_phase2": [
+    "Professional landing page built (static/professional_landing.html)",
+    "Hacker News Show HN post written (marketing/hn_launch_post.md)",
+    "Reddit launch post written (marketing/reddit_launch_post.md)",
+    "VSCode extension scaffold built (vscode-extension/)"
+  ],
   "next_actions": [
-    "Monitor PyPI download stats weekly",
-    "Build npm package distribution for TypeScript users",
-    "Create Docker image for cloud-hosted API version",
+    "Build npm package for TypeScript users",
+    "Create Docker image for cloud-hosted API",
     "Expand framework detection (more frameworks per language)"
   ]
 }
