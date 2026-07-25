@@ -25,4 +25,4 @@ Issues = "https://github.com/marcinkuk/ai-config-gen/issues"
 "Bug Tracker" = "https://github.com/marcinkuk/ai-config-gen/issues"
 
 [project.scripts]
-ai-config-gen = "src.ai_config_gen:main"
+ai-config-gen = "ai_config_gen:main"

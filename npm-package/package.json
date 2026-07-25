@@ -1,23 +1,35 @@
 {
   "name": "ai-config-gen",
-  "version": "0.4.0",
-  "description": "Auto-generate AI coding assistant config files (.claude.md, .cursorrules, .windsurfrules) from any codebase",
+  "version": "0.5.0",
+  "description": "CLI wrapper that runs the Python ai-config-gen tool to auto-generate AI coding assistant config files (.claude.md, .cursorrules, .windsurfrules) from any codebase",
   "main": "index.js",
   "bin": {
     "ai-config-gen": "index.js"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "node test.js"
   },
-  "keywords": ["ai", "config", "claude", "cursor", "windsurf", "coding-assistant"],
+  "keywords": [
+    "ai",
+    "config",
+    "claude",
+    "cursor",
+    "windsurf",
+    "copilot",
+    "coding-assistant",
+    "code-analysis",
+    "project-config",
+    "cli"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
   "author": "marcinkuk",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/marcinkuk/ai-config-gen"
   },
-  "homepage": "https://github.com/marcinkuk/ai-config-gen#readme",
-  "dependencies": {
-    "execa": "^9.0.0"
-  }
+  "homepage": "https://github.com/marcinkuk/ai-config-gen#readme"
 }

@@ -1,6 +1,6 @@
-# ai-config-gen (npm)
+# ai-config-gen (npm wrapper)
 
-Auto-generate AI coding assistant configuration files for any project.
+This is the **Node.js CLI wrapper** for [ai-config-gen](https://github.com/marcinkuk/ai-config-gen). It calls the Python `ai-config-gen` tool to auto-generate AI coding assistant configuration files for any project.
 
 ## What it does
 
@@ -27,8 +27,20 @@ ai-config-gen .
 # Analyze specific path
 ai-config-gen /path/to/project
 
-# Analyze and list only (no files written)
+# Preview without writing files
 ai-config-gen . --dry-run
+
+# Generate only one format
+ai-config-gen . --format claude
+
+# Generate multiple formats
+ai-config-gen . --formats claude,cursor
+
+# Save to custom output directory
+ai-config-gen . --output ./generated
+
+# Show analysis details
+ai-config-gen . --verbose
 ```
 
 ## Examples
@@ -38,24 +50,30 @@ ai-config-gen . --dry-run
 $ cd my-next-app
 $ ai-config-gen .
 
-🔍 Analyzing: my-next-app
-📦 Language: TypeScript
-⚙️  Frameworks: React, Next.js, Tailwind CSS
-📦 Package Manager: npm/yarn/pnpm
-🧪 Test Frameworks: Jest
+Analyzing project: /home/user/my-next-app
+Generated: /home/user/my-next-app/.claude.md
+Generated: /home/user/my-next-app/.cursorrules
+Generated: /home/user/my-next-app/.windsurfrules
 
-Generated:
-  ✓ .claude.md
-  ✓ .cursorrules
-  ✓ .github/copilot-instructions.md
-  ✓ .windsurfrules
+Done! Generated 3 config file(s).
 ```
 
 ## Requirements
 
-- Node.js 18+
-- Python 3.9+ (for the underlying analysis engine)
-- `ai-config-gen` pip package must be installed: `pip install ai-config-gen`
+- **Node.js 18+** (for the npm wrapper)
+- **Python 3.9+** (for the underlying analysis engine)
+- **`ai-config-gen` pip package** must be installed first:
+
+```bash
+pip install ai-config-gen
+```
+
+## Develop
+
+```bash
+npm test       # Run wrapper tests
+npm start      # Run CLI from source
+```
 
 ## GitHub
 
