@@ -1,9 +1,9 @@
 {
-  "budget_remaining": 948.33,
+  "budget_remaining": 925.82,
   "weekly_infrastructure_cost": 50.0,
   "human_cost_per_hour": 50.0,
   "current_strategy": "Growth + Monetization phase: Marketing launch, Pro pricing, distribution expansion",
-  "product_status": "v0.2.0 PUBLISHED on PyPI + GitHub. CLI, web API, landing page all working. CI/CD pipeline active.",
+  "product_status": "v0.3.0 PUBLISHED on PyPI + GitHub. CI/CD pipeline active. Sponsorship banners integrated.",
   "actions_taken": [
     "Market research: identified gap in AI coding assistant config generation",
     "Built MVP: ai-config-gen CLI with ProjectAnalyzer + ConfigGenerator",
@@ -14,12 +14,19 @@
     "Built distribution package (sdist + wheel) — zero external dependencies",
     "PUBLISHED v0.1.0 to PyPI: https://pypi.org/project/ai-config-gen/0.1.0/",
     "PUBLISHED v0.2.0 with full metadata, GitHub links, MIT license, keywords",
+    "PUBLISHED v0.3.0 with sponsorship banners + attribution headers: https://pypi.org/project/ai-config-gen/0.3.0/",
     "Created GitHub repo: https://github.com/marcinkuk/ai-config-gen",
     "Built CI/CD pipeline with GitHub Actions (auto-test, auto-publish)",
     "Added sponsorship banners to CLI output (passive marketing)",
     "Added attribution headers to every generated config file",
     "Built web_server.py: FastAPI endpoints with rate limiting",
     "Created landing page + Polish-language setup instructions"
+  ],
+  "human_tasks_completed": [
+    {"task": "PyPI account setup + email verification + token generation", "time_min": 15, "cost_pln": 12.50, "status": "DONE"},
+    {"task": "Provide GitHub sponsor link (marcinkuk)", "time_min": 5, "cost_pln": 4.17, "status": "DONE"},
+    {"task": "Generate GitHub PAT (personal access token)", "time_min": 5, "cost_pln": 4.17, "status": "DONE"},
+    {"task": "Review & correct budget tracking (feedback message)", "time_min": 2, "cost_pln": 1.67, "status": "DONE"}
   ],
   "human_intervention_needed": false,
   "pending_human_tasks": [],
@@ -34,10 +41,13 @@
     "optimistic_monthly": {"downloads": 5000, "sponsor_conversion_pct": 0.05, "avg_sponsor_pln": 20, "estimated_revenue_pln": 50}
   },
   "expenses": [
-    {"description": "Human restart (2 min interruption)", "cost_pln": 1.67}
+    {"description": "Human: PyPI account setup + token (15 min)", "cost_pln": 12.50},
+    {"description": "Human: GitHub sponsor link (5 min)", "cost_pln": 4.17},
+    {"description": "Human: GitHub PAT generation (5 min)", "cost_pln": 4.17},
+    {"description": "Human: Budget correction feedback (2 min)", "cost_pln": 1.67},
+    {"description": "Total human cost", "cost_pln": 22.51}
   ],
   "next_actions": [
-    "Publish v0.3.0 with sponsorship links + attribution headers",
     "Build professional landing page with pricing tiers",
     "Submit to Hacker News 'Show HN' + Reddit r/programming",
     "Create VSCode extension for 1-click config generation",
