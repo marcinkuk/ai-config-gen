@@ -35,7 +35,9 @@
   ],
   "human_intervention_needed": true,
   "pending_human_tasks": [
-    {"task": "Provide PyPI token for v0.4.0 publication", "estimated_time_hrs": 0.05, "cost_pln": 2.5, "reason": "Cannot publish to PyPI without authentication token. Previous token was not stored in environment."}
+    {"task": "Publish v0.5.0 to PyPI", "estimated_time_hrs": 0.05, "cost_pln": 2.5, "reason": "PyPI token not in environment. Run: cd /workspace/project/aibusiness && twine upload dist/ai_config_gen-0.5.0.* --upload-token $PYPi_TOKEN"},
+    {"task": "Post HN Show HN (marketing/hn_launch_post.md)", "estimated_time_hrs": 0.05, "cost_pln": 2.5, "reason": "Requires human to post at https://news.ycombinator.com/submit"},
+    {"task": "Post Reddit r/sideproject + r/Python (marketing/reddit_launch_post.md)", "estimated_time_hrs": 0.1, "cost_pln": 5.0, "reason": "Requires human Reddit account to cross-post"}
   ],
   "revenue_streams": [
     {"name": "PyPI package (ai-config-gen)", "status": "PUBLISHED - live", "model": "open source + passive attribution"},
@@ -69,7 +71,9 @@
     "Built comprehensive README.md with usage examples, feature matrix, Docker, VSCode, and sponsorship links"
   ],
   "next_actions": [
-    "Bump version to v0.5.0 and publish to PyPI (blocked: need PyPI token from human)",
-    "Post HN launch + Reddit launch (blocked: need human to post)"
+    "v0.5.0 built and ready — waiting for human to publish to PyPI",
+    "Create pypi-publish.sh convenience script for fast deploy",
+    "Research next product: VSCode extension marketplace submission",
+    "Build npm package publish-ready version"
   ]
 }
