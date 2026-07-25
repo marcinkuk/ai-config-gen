@@ -21,7 +21,7 @@ export function activate(context: vscode.ExtensionContext) {
       }, async () => {
         try {
           const result = await spawnConfigGen(targetDir, outputFormats);
-          if (result.success) {
+          if (result.success && result.files) {
             vscode.window.showInformationMessage(`Generated ${result.files.length} config file(s). Open them to review.`);
             // Open generated files
             for (const file of result.files) {
