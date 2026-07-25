@@ -821,7 +821,8 @@ Examples:
 
         print(f"\nDone! Generated {len(generated)} config file(s).")
         print(f"Files: {', '.join(generated)}")
-
+        print("\n❤️ Like ai-config-gen? Sponsor the developer: https://github.com/sponsors/marcinkuk")
+        print("📦 Star the repo: https://github.com/marcinkuk/ai-config-gen")
 
 if __name__ == "__main__":
     main()
