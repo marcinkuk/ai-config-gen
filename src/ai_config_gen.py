@@ -140,7 +140,7 @@ FRAMEWORK_INDICATORS = {
     # PHP
     "Laravel": ["laravel", "artisan", "composer.json"],
     "Symfony": ["symfony"],
-    "CodeIgniter": ["codeigniter", "ci"],
+    "CodeIgniter": ["codeigniter", "application/config"],
     "WordPress": ["wordpress", "wp-content"],
     # Ruby
     "Rails": ["rails", "Gemfile", "config/routes.rb"],
@@ -174,6 +174,7 @@ PACKAGE_MANAGERS = {
     "Gemfile": "bundler",
     "composer.json": "composer",
     "pubspec.yaml": "pub",
+    "pom.xml": "maven",
 }
 
 IGNORE_DIRS = {
