@@ -1,0 +1,50 @@
+{
+  "name": "ai-config-gen-vscode",
+  "displayName": "AI Config Gen — Auto-Generate AI Assistant Configs",
+  "description": "One-click generate .claude.md, .cursorrules, .windsurfrules for your workspace",
+  "version": "0.1.0",
+  "publisher": "marcinkuk",
+  "engines": { "vscode": "^1.90.0" },
+  "categories": ["Other"],
+  "activation": ["onCommand:aiConfigGen.generate"],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "aiConfigGen.generate",
+        "title": "AI Config Gen: Generate AI Assistant Configs"
+      },
+      {
+        "command": "aiConfigGen.openSettings",
+        "title": "AI Config Gen: Settings"
+      }
+    ],
+    "configuration": {
+      "title": "AI Config Gen",
+      "properties": {
+        "aiConfigGen.targetDir": {
+          "type": "string",
+          "default": "${workspaceFolder}",
+          "description": "Target directory for config generation"
+        },
+        "aiConfigGen.outputFormats": {
+          "type": "array",
+          "default": [".claude.md", ".cursorrules", ".windsurfrules"],
+          "description": "Config formats to generate"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p tsconfig.json",
+    "watch": "tsc -watch -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^2.25.0",
+    "@types/vscode": "^1.90.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0"
+  },
+  "license": "MIT"
+}
