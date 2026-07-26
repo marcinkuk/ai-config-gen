@@ -795,12 +795,146 @@ class ConfigGenerator:
         # Windsurf uses similar format to Claude
         return md
 
+    def generate_copilot(self) -> str:
+        """Generate .github/copilot-instructions.md configuration file."""
+        lines = []
+
+        # Project overview
+        lines.append("# Project Overview")
+        lines.append(f"**Project:** {self.info.name}")
+        lines.append(f"**Language:** {self.info.language or 'N/A'}")
+        if self.info.frameworks:
+            lines.append(f"**Frameworks:** {', '.join(self.info.frameworks)}")
+        if self.info.tech_stack:
+            lines.append(f"**Tech Stack:** {', '.join(self.info.tech_stack)}")
+        if self.info.package_manager:
+            lines.append(f"**Package Manager:** {self.info.package_manager}")
+        if self.info.patterns:
+            lines.append("**Architecture:**")
+            for p in self.info.patterns:
+                lines.append(f"- {p}")
+        lines.append("")
+
+        # Coding conventions
+        lines.append("# Coding Conventions")
+        if self.info.conventions:
+            for c in self.info.conventions:
+                lines.append(f"- {c}")
+        else:
+            lines.append("- Follow language-standard conventions")
+        lines.append("- Use descriptive variable and function names")
+        lines.append("- Keep functions focused and under 50 lines")
+        if self.info.language == "Python":
+            lines.append("- Use type hints consistently")
+            lines.append("- Follow PEP 8 style guidelines")
+        elif self.info.language in ("JavaScript", "TypeScript"):
+            lines.append("- Use camelCase for variables and functions")
+            lines.append("- Prefer const/let over var")
+        lines.append("")
+
+        # Build and run instructions
+        lines.append("# Build & Run Instructions")
+        if self.info.language == "Python":
+            lines.append("```bash")
+            if self.info.package_manager == "pip/uv/poetry":
+                lines.append("# Install dependencies")
+                lines.append("pip install -r requirements.txt  # or: uv sync")
+            if self.info.build_tools:
+                for tool in self.info.build_tools:
+                    lines.append(f"# Run with {tool}")
+                    lines.append(f"uvicorn main:app  # or: {tool}")
+            lines.append("```")
+        elif self.info.language in ("JavaScript", "TypeScript"):
+            lines.append("```bash")
+            lines.append("npm install")
+            if self.info.build_tools:
+                for tool in self.info.build_tools:
+                    lines.append(f"npm run {tool}")
+            else:
+                lines.append("npm start")
+            lines.append("```")
+        elif self.info.language == "Rust":
+            lines.append("```bash")
+            lines.append("cargo build")
+            lines.append("cargo run")
+            lines.append("```")
+        elif self.info.language == "Go":
+            lines.append("```bash")
+            lines.append("go build ./...")
+            lines.append("go run main.go")
+            lines.append("```")
+        elif self.info.language == "Java":
+            lines.append("```bash")
+            lines.append("mvn clean install  # or: gradle build")
+            lines.append("```")
+        else:
+            lines.append("Refer to README.md for build and run instructions.")
+        lines.append("")
+
+        # Testing setup
+        lines.append("# Testing Setup")
+        if self.info.test_frameworks:
+            lines.append(f"**Test framework:** {', '.join(self.info.test_frameworks)}")
+            if self.info.language == "Python":
+                lines.append("```bash")
+                lines.append("pytest")
+                lines.append("```")
+            elif self.info.language in ("JavaScript", "TypeScript"):
+                lines.append("```bash")
+                if "Jest" in self.info.test_frameworks:
+                    lines.append("npm test")
+                else:
+                    lines.append("npm test  # configured via test framework")
+                lines.append("```")
+            elif self.info.language == "Rust":
+                lines.append("```bash")
+                lines.append("cargo test")
+                lines.append("```")
+            elif self.info.language == "Go":
+                lines.append("```bash")
+                lines.append("go test ./...")
+                lines.append("```")
+        else:
+            lines.append("No test framework detected. Refer to project documentation for testing.")
+        lines.append("")
+
+        # Package management
+        lines.append("# Package Management")
+        if self.info.package_manager:
+            lines.append(f"**Current package manager:** {self.info.package_manager}")
+            if self.info.package_manager in ("pip/uv/poetry", "pip"):
+                lines.append("```bash")
+                lines.append("# Add a dependency")
+                lines.append("pip install <package-name>")
+                lines.append("# Or with uv")
+                lines.append("uv add <package-name>")
+                lines.append("```")
+            elif self.info.package_manager in ("npm/yarn/pnpm",):
+                lines.append("```bash")
+                lines.append("# Add a dependency")
+                lines.append("npm install <package-name>")
+                lines.append("```")
+            elif self.info.package_manager == "cargo":
+                lines.append("```bash")
+                lines.append("cargo add <package-name>")
+                lines.append("```")
+            elif self.info.package_manager == "go mod":
+                lines.append("```bash")
+                lines.append("go get <module-path>")
+                lines.append("```")
+        else:
+            lines.append("No package manager detected.")
+        lines.append("")
+
+        return "\n".join(lines) + "\n"
+
     def generate_all(self, formats: Optional[List[str]] = None) -> dict:
         """Generate all or specified config formats."""
         generators = {
             "claude": (".claude.md", self.generate_claude_md),
             "cursor": (".cursorrules", self.generate_cursor_rules),
             "windsurf": (".windsurfrules", self.generate_windsurf_rules),
+            "copilot": (".github/copilot-instructions.md", self.generate_copilot),
         }
 
         if not formats:
@@ -829,7 +963,7 @@ Examples:
         """,
     )
     parser.add_argument("project", nargs="?", default=".", help="Path to project directory (default: current)")
-    parser.add_argument("--format", choices=["claude", "cursor", "windsurf"], help="Generate only this format")
+    parser.add_argument("--format", choices=["claude", "cursor", "windsurf", "copilot"], help="Generate only this format")
     parser.add_argument("--formats", help="Comma-separated list of formats to generate")
     parser.add_argument("--verbose", "-v", action="store_true", help="Show detailed analysis output")
     parser.add_argument("--output", "-o", default=None, help="Output directory (default: project root)")
@@ -849,7 +983,7 @@ Examples:
     elif args.formats:
         formats = [f.strip() for f in args.formats.split(",")]
     else:
-        formats = ["claude", "cursor", "windsurf"]
+        formats = ["claude", "cursor", "windsurf", "copilot"]
 
     # Analyze
     print(f"Analyzing project: {project_path}")

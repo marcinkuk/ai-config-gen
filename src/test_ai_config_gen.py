@@ -303,6 +303,54 @@ class TestConfigGenerator:
         assert "npm install" in output
         assert "npm test" in output
 
+    def test_generate_copilot(self, tmp_path):
+        """Test .github/copilot-instructions.md generation."""
+        info = self._make_info()
+        gen = ConfigGenerator(info, tmp_path)
+        output = gen.generate_copilot()
+
+        assert "# Project Overview" in output
+        assert "**Project:** test-project" in output
+        assert "**Language:** Python" in output
+        assert "# Coding Conventions" in output
+        assert "type hints" in output
+        assert "# Build & Run Instructions" in output
+        assert "# Testing Setup" in output
+        assert "**Test framework:** pytest" in output
+        assert "# Package Management" in output
+        assert "pip install" in output
+
+    def test_copilot_in_generate_all(self, tmp_path):
+        """Test that copilot format is included in generate_all."""
+        info = self._make_info()
+        gen = ConfigGenerator(info, tmp_path)
+        configs = gen.generate_all()
+
+        assert ".github/copilot-instructions.md" in configs
+
+    def test_generate_copilot_specific(self, tmp_path):
+        """Test generating only copilot format."""
+        info = self._make_info()
+        gen = ConfigGenerator(info, tmp_path)
+        configs = gen.generate_all(formats=["copilot"])
+
+        assert list(configs.keys()) == [".github/copilot-instructions.md"]
+
+    def test_generate_copilot_rust(self, tmp_path):
+        """Test copilot generation for Rust projects."""
+        info = self._make_info(
+            language="Rust",
+            package_manager="cargo",
+            tech_stack=["Rust"],
+            test_frameworks=["unknown"],
+        )
+        gen = ConfigGenerator(info, tmp_path)
+        output = gen.generate_copilot()
+
+        assert "cargo build" in output
+        assert "cargo test" in output
+        assert "cargo add" in output
+
 
 class TestEdgeCases:
     """Tests for edge cases."""
