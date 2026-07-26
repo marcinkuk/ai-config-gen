@@ -419,126 +419,139 @@ Stars: 198,035 | Forks: 59,633 | License: SSL-v2 (fair-code)
 
 ---
 
-## Rekomendacja
+## Rekomendacja — REWIZJA: **AutoGen** (primary)
 
-### Dla Twojego przypadku: **LangGraph** (primary) + **n8n** (execution layer)
+> **Kluczowa zmiana:** LangGraph nie jest poprawny — ma **sztywne** akcje.
+> Agent **NIE może** dodać nowej akcji w locie.
+>
+> **AutoGen** jest POPRAWNA odpowiedź: agent **tworzy nowe agenty dynamicznie**.
+> Jeśli stwierdzi "potrzebuję dział HR" → tworzy go. "Nie potrzebuję" → usuwa.
 
-> **Kluczowa zmiana:** Poprzednia rekomendacja (OpenHands + Letta) była **błędna** — OpenHands
-> jest **session-bound** (każda sesja kończy się). LangGraph rozwiązuje ten problem.
+### Co OZNACZA "Agent Tworzy Cały System Sam":
 
-| Poziom | Narzędzie | Rola |
-|--------|-----------|------|
-| **Primary Agent** | **LangGraph** | Core: state machine + checkpointing + graph loops + learning |
-| **Execution** | **n8n** | Schedule triggers + integrations + 24/7 daemon (lub bez n8n: systemd cron) |
-| **Human-in-loop** | **LangGraph** | Break node → user approves via webhook/API → resume |
-| **Memory** | **LangGraph State** | Custom schema: `{budget, ideas, lessons, strategy, requests}` |
-| **Tools** | **LangChain tools** | Web scraping, API calls, file creation, calculation |
+```
+Cykl 1:  "Sprawdzę rynek"         → wywołuje Research node
+Cykl 2:  "Potrzebuję dział HR"    → TWORZY nowego agenta "Recruiter" (nie istniał!)
+Cykl 3:  "Rekrutator znalazł 3 kandydatów"
+Cykl 4:  "Nie warto szukać, zrobię inaczej" → USUWA agenta "Recruiter"
+Cykl 5:  "Potrzebuję marketera"   → TWORZY agenta "Marketer"
+Cykl 6:  "Potrzebuję financial model" → TWORZY agenta "FinAnalyzer"
+... i tak dalej, agent WZROSTE organicznie
+```
 
-**Dlaczego LangGraph zamiast OpenHands:**
+**To jest AutoGen — jedyny framework który pozwala na TRUE self-modifying agent.**
 
-| Kryterium | OpenHands | LangGraph |
-|-----------|-----------|-----------|
-| **Continuous months?** | ❌ Session ends → agent dies | ✅ Checkpoint → resume → runs forever |
-| **State persistence?** | ⚠️ AGENTS.md (limited) | ✅ Full structured state (SQLite/PostgreSQL) |
-| **Human-in-loop?** | ⚠️ Interactive chat | ✅ Break node → wait → resume |
-| **Graph loops?** | ❌ Linear flow | ✅✅ Native cyclic graphs |
-| **License?** | Apache-2.0 | **MIT** (najlepsza) |
-| **I can build it?** | ✅ Jestem nim | ✅ ✅ ✅ Native Python code |
+| Kryterium | LangGraph | AutoGen |
+|-----------|-----------|---------|
+| Pre-defined actions | ✅ Only fixed nodes | ❌ NIE |
+| Dynamiczne tworzenie agentów | ❌ | ✅ **RACZEWNA** |
+| Dynamiczne usuwanie agentów | ❌ | ✅ |
+| Multi-agent group chat | ❌ | ✅ |
+| Self-modifying pipeline | ❌ | ✅ |
+| Non-stop `while True` | ✅ | ✅ (custom loop) |
+| Checkpointing (built-in) | ✅✅✅ | ✅ (state serialization) |
+| Local LLM support (Ollama) | ✅ | ✅ |
+| License | MIT | **MIT** |
+| Repo stars | 38k | 42k |
+| Maintainer | LangChain | Microsoft |
 
-**Dlaczego n8n jako execution layer:**
-- ✅ Self-hosted daemon (`docker-compose up -d`) — działa 24/7
-- ✅ Schedule triggers: workflow runs co 6h / co 24h automatycznie
-- ✅ 400+ integracji: email, web scraping, CRM, social media, ...
-- ✅ Webhook triggers: event-based activation
-- ✅ Templates: gotowe business workflows
+### Dlaczego AutoGen jest POPRAWNA odpowiedź:
 
-**Alternatywa: Only LangGraph (bez n8n)**
-- Jeśli nie chcesz n8n: uruchom LangGraph jako systemd service
-- `while True: graph.invoke(state); time.sleep(3600)` — co godzinę jeden cycle
-- Prostszym setup (tylko Docker + Ollama)
-
-**Gdybyś NIE chciał kodować (no-code):**
-- Używaj tylko **n8n** — AI Agent node + schedule triggers
-- Ale: **słaba "learning" capability** — nie true agent memory
+| Twój wymaganie | LangGraph | AutoGen |
+|----------------|-----------|---------|
+| Agent działa non-stop | ✅ `while True` | ✅ custom loop |
+| Agent tworzyc nowe moźliwości | ❌ sztywne | ✅ dynamiczne tworzenie |
+| Agent usuna co niepotrzebne | ❌ | ✅ |
+| Agent decyduje SAM co робит | ⚠️ z pre-defined set | ✅ dowolna akcja |
+| Brak external scheduler | ✅ | ✅ |
+| Local LLM (Ollama) | ✅ | ✅ |
 
 ---
 
-## Architektura Pełnego Systemu
+## Architektura: AutoGen — Self-Modifying Business Agent
 
 ```
-┌──────────────────────────────────────────────────────────────────┐
-│                    BUSINESS AGENT SYSTEM                          │
-│                                                                    │
-│  ┌────────────┐                                                   │
-│  │  n8n daemon │ ←──── Self-hosted, runs 24/7                     │
-│  └─────┬──────┘                                                   │
-│        │ schedule: co 6h                                           │
-│        ▼                                                           │
-│  ┌────────────────────────────────────────────┐                   │
-│  │         LangGraph Agent (Python)           │                   │
-│  │                                            │                   │
-│  │  ┌──────────┐ ┌───────────────────────┐   │                   │
-│  │  │  Graph   │ │  Checkpoint (SQLite)  │   │                   │
-│  │  │          │ │                        │   │                   │
-│  │  │ Ideate → │→→ Research → → Build →  │   │                   │
-│  │  │          │   ↓         ↓           │   │                   │
-│  │  │  Human?  │←─ Test → ← Finance      │   │                   │
-│  │  │ (break)  │    ↓         ↓           │   │                   │
-│  │  │          │   Learn → ← Strategy     │   │                   │
-│  │  │          │    ↓         ↓           │   │                   │
-│  │  │  Next    │   └──→ resume → Ideate   │   │                   │
-│  │  └──────────┘ └───────────────────────┘   │                   │
-│  └────────────────────────────────────────────┘                   │
-│        │                                                           │
-│        ▼                                                           │
-│  ┌────────────────────────────────────────────┐                   │
-│  │  Tools (LangChain)                         │                   │
-│  │  - Ollama LLM (reasoning)                  │                   │
-│  │  - Web scraper (market research)           │                   │
-│  │  - File creator (landing pages, scripts)   │                   │
-│  │  - Calculator (budget, ROI, break-even)    │                   │
-│  │  - SQLite (budget, lessons, ideas, history)│                   │
-│  └────────────────────────────────────────────┘                   │
-└──────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────┐
+│  business_agent.py (systemd / nohup — runs 24/7 non-stop)       │
+│                                                                  │
+│  while True:                                                     │
+│    state = load_checkpoint()                                     │
+│                                                                  │
+│    # MANAGER AGENT — zawsze istnieje                              │
+│    manager = ConversableAgent(                                   │
+│        name="Manager",                                           │
+│        system_message="""                                          │
+│           Jesteś business manager. Masz budżet {budget}.          │
+│           Twoim zadaniem jest budowanie businesses.               │
+│           Możesz TWORZYĆ nowe agenty do nowych zadań.             │
+│           Możesz USUNAĆ agenty które nie są potrzebne.            │
+│           Na każdym kroku DECIDE co robić.                       │
+│        """,                                                       │
+│        llm_config={"model": "qwen2.5-coder"}                     │
+│    )                                                             │
+│                                                                  │
+│    # DYNAMICzne agenty (tworzone/usuwanie w locie)                │
+│    active_agents = [manager]                                     │
+│                                                                  │
+│    # Grupa agentów rozmawia przez group chat                     │
+│    group = GroupChat(agents=active_agents)                       │
+│    manager.initiate_chat(group_manager, messages=state["task"])  │
+│                                                                  │
+│    # Po zakończeniu cyklu:                                        │
+│    state = save_state(group.chat_history)                        │
+│    save_checkpoint(state)                                        │
+│    # IMMEDIATELY next cycle — no pause!                          │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-**Flow jeden cyklu:**
-1. n8n trigger (co 6h) → invoke LangGraph agent
-2. Load checkpoint state → resume where left off
-3. **Ideate:** LLM generates 3-5 new ideas based on past lessons
-4. **Research:** Web scraping → market data, competitors, pricing
-5. **Finance:** Calculate costs, ROI, budget feasibility
-6. **Build:** Create MVP (script, landing page, bot)
-7. **Test:** Run it → collect metrics
-8. **Learn:** Reward/penalize → update lessons → save state
-9. **Human request?** → pause → wait for approval → resume
-10. Save checkpoint → exit → wait for next n8n trigger
+**Jak Manager tworzy nowego agenta:**
 
-**To działa miesiącami.** Poprzedni agent "kończył zadanie" — ten **nigdy nie kończy**, bo:
-- Graph loop = nieskończona pętla
-- Checkpoint = state survives restart
-- n8n trigger = auto-restart co N godzin
-- Crash? → resume od ostatniego checkpoint
+```python
+# Manager decyduje (LLM decyduje!)
+if "hire" in manager_decision:
+    recruiter = ConversableAgent(
+        name="Recruiter",
+        system_message="Find candidates, interview, recommend",
+        llm_config={"model": "qwen2.5-coder"}
+    )
+    active_agents.append(recruiter)  # NOWY AGENT added!
+
+if "fire" in manager_decision:
+    active_agents = [a for a in active_agents if a.name != "Recruiter"]
+    # AGENT USUNIĘTY
+
+# Następny cykl: grupa działa z NOWYM składem
+group = GroupChat(agents=active_agents)
+```
+
+**Flow jeden cyklu (NIE jest fixed):**
+
+1. Manager obudza się → ładuje state (budget, history, lessons)
+2. Manager decyduje (LLM): "Co robimy teraz?" → **dowolna decyzja**
+3. Jeśli Manager stwierdzi "potrzebuję X" → **tworzy X**
+4. Agenty rozmawiają (group chat)
+5. Wyniki zapisane → state updated → **natychmiast następny cykl**
+
+**To działa NON-STOP.** Zero przerw, zero schedulera.
 
 ---
 
-## Szybki Start — LangGraph + Ollama
+## Szybki Start — AutoGen + Ollama
 
 ```bash
 # 1. Zainstaluj Ollama z modelem lokalnym
 ollama pull qwen2.5-coder:32b
 
-# 2. Zainstaluj LangGraph
-pip install langgraph langchain langchain-community langchain-ollama
+# 2. Zainstaluj AutoGen
+pip install pyautogen
 
-# 3. Uruchom agenta (prosty przykład — pełny kod dostarczę w osobnym pliku)
+# 3. Uruchom agenta
 python business_agent.py
 ```
 
 **Wymagania sprzętowe:**
 - Minimum: 16GB RAM (7B model)
 - Rekomendowane: 64GB RAM + GPU (32B model)
-- Docker (opcjonalnie, dla n8n execution layer)
 - Serwer/VM 24/7 (VPS $5/mc lub home server)
 
 ---
